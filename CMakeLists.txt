@@ -1,32 +1,59 @@
-cmake_minimum_required(VERSION 4.0)
-include_directories(src)
+cmake_minimum_required(VERSION 3.20) # Note: VERSION 4.0 doesn't exist yet! 3.20 is standard.
 
 project(myengine)
-# Create an option to switch between a system sdl library and a vendored SDL library
+
+set(SHADER_FILES 
+        "${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.vert"
+        "${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.frag"
+    )
+
+
+
+list(APPEND CMAKE_PREFIX_PATH "~/SDL/SDL/sdl_install")
+
+# 1. Setup Options
 option(MYGAME_VENDORED "Use vendored libraries" OFF)
+# 2. Find Dependencies (Must happen before creating targets)
+find_package(Vulkan REQUIRED)
 
 if(MYGAME_VENDORED)
-    # This assumes you have added SDL as a submodule in vendored/SDL
     add_subdirectory(vendored/SDL EXCLUDE_FROM_ALL)
 else()
-    # 1. Look for a SDL3 package,
-    # 2. look for the SDL3-shared component, and
-    # 3. fail if the shared component cannot be found.
-    find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3-shared)
+    # If this fails, we need to point CMake to your SDL3 folder (see below)
+    find_package(SDL3 REQUIRED CONFIG COMPONENTS SDL3-shared)
 endif()
 
-# Create your game executable target as usual
-add_executable(myengine WIN32 tests.cpp)
+# 3. Create Targets
+# We use one target name 'myengine' and adjust properties based on OS
+add_executable(myengine tests.cpp src/volk.c) 
 
-# Link to the actual SDL3 library.
-target_link_libraries(myengine PRIVATE SDL3::SDL3)
+# 4. Target Properties & Includes (Target must exist now!)
+target_include_directories(myengine PRIVATE 
+    ${Vulkan_INCLUDE_DIRS} 
+    "src"
+)
 
+# 5. Link Libraries
+target_link_libraries(myengine PRIVATE 
+    SDL3::SDL3-shared 
+    Vulkan::Headers
+)
+target_sources(myengine PRIVATE ${SHADER_FILES})
+set_source_files_properties(${SHADER_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/shaders)
 
+# 6. OS Specific Logic
 if(WIN32)
+    # Copy DLL to exe folder so it runs
     add_custom_command(
         TARGET myengine POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy $<TARGET_FILE:SDL3::SDL3-shared> $<TARGET_FILE_DIR:myengine>
         VERBATIM
     )
-    
+endif()
+
+if(APPLE)
+    set_target_properties(myengine PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_BUNDLE_GUI_IDENTIFIER "com.myengine.test"
+    )
 endif()

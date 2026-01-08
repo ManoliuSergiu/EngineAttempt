@@ -1,0 +1,3 @@
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/myengine.dir
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/edit_cache.dir
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/rebuild_cache.dir
