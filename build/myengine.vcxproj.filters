@@ -4,9 +4,16 @@
     <ClCompile Include="F:\GameEngine\tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="F:\GameEngine\src\volk.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="F:\GameEngine\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="F:\GameEngine\shaders\shader.vert" />
+    <None Include="F:\GameEngine\shaders\shader.frag" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

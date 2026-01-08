@@ -8,9 +8,11 @@ set(SHADER_FILES
     )
 
 
-
-list(APPEND CMAKE_PREFIX_PATH "~/SDL/SDL/sdl_install")
-
+if(APPLE)
+    list(APPEND CMAKE_PREFIX_PATH "~/SDL/SDL/sdl_install")
+elseif (WIN32)
+    list(APPEND CMAKE_PREFIX_PATH "C:/SDL")
+endif ()
 # 1. Setup Options
 option(MYGAME_VENDORED "Use vendored libraries" OFF)
 # 2. Find Dependencies (Must happen before creating targets)
@@ -25,7 +27,8 @@ endif()
 
 # 3. Create Targets
 # We use one target name 'myengine' and adjust properties based on OS
-add_executable(myengine tests.cpp src/volk.c) 
+add_executable(myengine tests.cpp src/volk.c
+        tests.cpp)
 
 # 4. Target Properties & Includes (Target must exist now!)
 target_include_directories(myengine PRIVATE 
