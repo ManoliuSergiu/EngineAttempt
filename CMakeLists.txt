@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20) # Note: VERSION 4.0 doesn't exist yet! 3.20 is standard.
-
+set(CMAKE_CXX_STANDARD 17)
 project(myengine)
 
 set(SHADER_FILES 

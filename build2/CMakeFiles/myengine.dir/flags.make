@@ -15,7 +15,7 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/src -I/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers -isystem /opt/homebrew/include -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.
 
-CXX_FLAGSarm64 =  -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
+CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
 
-CXX_FLAGS =  -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
+CXX_FLAGS = -std=gnu++17 -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
 
