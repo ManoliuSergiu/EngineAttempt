@@ -317,7 +317,7 @@ void createGraphicsPipeline() {
     pipelineInfo.subpass = 0;
     
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
-        throw std::runtime_error("failed to create graphics pipeline!");
+        SDL_Log("Graphics Pipeline failed creation!");
     }
 
     // Clean up the modules (the pipeline has copied the code, we don't need these anymore)
