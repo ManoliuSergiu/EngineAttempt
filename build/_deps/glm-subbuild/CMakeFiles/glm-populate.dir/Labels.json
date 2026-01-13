@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/glm-populate"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/4cff102b553525e33b59de7b6e37c539/glm-populate.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/529e33041140c2a5f75b016b0e25a811/glm-populate-complete.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-build.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-configure.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-download.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-install.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-mkdir.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-patch.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-test.rule"
+		},
+		{
+			"file" : "F:/GameEngine/build/_deps/glm-subbuild/CMakeFiles/37dfaadbef1648bf2df3699229610a02/glm-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"glm-populate"
+		],
+		"name" : "glm-populate"
+	}
+}

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="F:\GameEngine\tests.cpp">
+    <ClCompile Include="F:\GameEngine\src\volk.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="F:\GameEngine\src\volk.c">
+    <ClCompile Include="F:\GameEngine\tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -12,8 +12,8 @@
     <CustomBuild Include="F:\GameEngine\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="F:\GameEngine\shaders\shader.vert" />
-    <None Include="F:\GameEngine\shaders\shader.frag" />
+    <None Include="F:\GameEngine\vert.spv" />
+    <None Include="F:\GameEngine\frag.spv" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">

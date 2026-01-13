@@ -14,11 +14,14 @@ set(ASSET_FILES
 if(APPLE)
     list(APPEND CMAKE_PREFIX_PATH "~/SDL/SDL/sdl_install")
 elseif (WIN32)
-    list(APPEND CMAKE_PREFIX_PATH "C:/SDL")
+    set(SDL3_DIR "C:/SDL/cmake")
 endif ()
 
+
+
+
 find_package(Vulkan REQUIRED)
-find_package(SDL3 REQUIRED CONFIG COMPONENTS SDL3-shared)
+find_package(SDL3 REQUIRED CONFIG COMPONENTS SDL3)
 
 # --- 3. BUILD TARGET ---
 add_executable(myengine src/volk.c tests.cpp)
@@ -52,7 +55,15 @@ else()
         )
     endforeach()
 endif()
+include(FetchContent)
 
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG        1.0.3  # Replace with the version you want
+)
+FetchContent_MakeAvailable(glm)
+target_link_libraries(myengine PRIVATE glm::glm)
 # --- 5. WINDOWS DLL COPYING ---
 if(WIN32)
     # Auto-copy SDL3.dll to the exe folder so you don't get "DLL Missing" errors

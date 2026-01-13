@@ -6,6 +6,7 @@
                 "${workspaceFolder}/**",
                 "C:/SDL/include",
                 "${workspaceFolder}/src",
+                "${workspaceFolder}/build/_deps/glm-src/",
                 "C:/VulkanSDK/1.4.335.0/Include"
             ],
             "defines": [

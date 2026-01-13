@@ -2,7 +2,7 @@
 #define VK_NO_PROTOTYPES
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
-#define GLM_FORCE_DEFAULT_ALIGNED_GENTYPES
+
 
 
 
@@ -18,6 +18,7 @@
 #include <vector>
 #include <set>
 #include <optional>
+#include <array>
 
 static SDL_Window *window = nullptr;
 
@@ -207,8 +208,8 @@ VkShaderModule createShaderModule(const std::vector<char>& code) {
 }
 
 void createGraphicsPipeline() {
-    auto vertShaderCode = readFile("Resources/vert.spv");
-    auto fragShaderCode = readFile("Resources/frag.spv");
+    auto vertShaderCode = readFile("vert.spv");
+    auto fragShaderCode = readFile("frag.spv");
 
     VkShaderModule vertShaderModule = createShaderModule(vertShaderCode);
     VkShaderModule fragShaderModule = createShaderModule(fragShaderCode);
@@ -562,9 +563,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 		}
 
 	}
-	if (physicalDevice == VK_NULL_HANDLE) {
-		throw std::runtime_error("failed to find a suitable GPU!");
-	}
+	
 
     // ---------------------------------------------------------
     // STEP 3: CREATE LOGICAL DEVICE (The missing piece)
@@ -851,6 +850,23 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Failed to create sync objects!"); 
         return SDL_APP_FAILURE; 
     }
+    createGraphicsPipeline();
+
+    // 2. Create and fill the Vertex Buffer (Fixes NULL buffer crash)
+    VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
+
+    createBuffer(bufferSize,
+             VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+             VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+             vertexBuffer,
+             vertexBufferMemory);
+
+    void* data;
+    vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
+    memcpy(data, vertices.data(), (size_t)bufferSize);
+    vkUnmapMemory(device, vertexBufferMemory);
+
+    // ----------------------------------------
 
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
@@ -919,9 +935,9 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         VkBuffer vertexBuffers[] = {vertexBuffer}; // Make sure 'vertexBuffer' is your global buffer handle
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
-        // DRAW 3 VERTICES (The Triangle hardcoded in shader)
+
         vkCmdDraw(commandBuffer, 3, 1, 0, 0);
-        
+
     vkCmdEndRenderPass(commandBuffer);
     vkEndCommandBuffer(commandBuffer);
 
