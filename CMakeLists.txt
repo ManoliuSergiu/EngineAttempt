@@ -3,9 +3,9 @@ set(CMAKE_CXX_STANDARD 17)
 project(myengine)
 
 set(SHADER_FILES 
-        "${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.vert"
-        "${CMAKE_CURRENT_SOURCE_DIR}/shaders/shader.frag"
-    )
+        "${CMAKE_CURRENT_SOURCE_DIR}/vert.spv" 
+        "${CMAKE_CURRENT_SOURCE_DIR}/frag.spv"
+        )
 
 
 if(APPLE)
@@ -42,7 +42,7 @@ target_link_libraries(myengine PRIVATE
     Vulkan::Headers
 )
 target_sources(myengine PRIVATE ${SHADER_FILES})
-set_source_files_properties(${SHADER_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/shaders)
+set_source_files_properties(${SHADER_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources/)
 
 # 6. OS Specific Logic
 if(WIN32)

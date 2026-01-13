@@ -24,7 +24,8 @@
             "includePath": [
                 "~/SDL/SDL/include",
                 "${workspaceFolder}/src",
-                "~/SDL3/"
+                "~/SDL3/",
+                "/usr/local/include"
             ],
             "defines": [
                 "_DEBUG",
