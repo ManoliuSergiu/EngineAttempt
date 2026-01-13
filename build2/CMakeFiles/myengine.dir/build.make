@@ -72,32 +72,18 @@ include CMakeFiles/myengine.dir/flags.make
 CMakeFiles/myengine.dir/codegen:
 .PHONY : CMakeFiles/myengine.dir/codegen
 
-myengine.app/Contents/Resources//vert.spv: /Users/sergiumanoliu/GameEngine1/EngineAttempt/vert.spv
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content myengine.app/Contents/Resources//vert.spv"
-	$(CMAKE_COMMAND) -E copy /Users/sergiumanoliu/GameEngine1/EngineAttempt/vert.spv myengine.app/Contents/Resources//vert.spv
+myengine.app/Contents/Resources/vert.spv: /Users/sergiumanoliu/GameEngine1/EngineAttempt/vert.spv
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content myengine.app/Contents/Resources/vert.spv"
+	$(CMAKE_COMMAND) -E copy /Users/sergiumanoliu/GameEngine1/EngineAttempt/vert.spv myengine.app/Contents/Resources/vert.spv
 
-myengine.app/Contents/Resources//frag.spv: /Users/sergiumanoliu/GameEngine1/EngineAttempt/frag.spv
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content myengine.app/Contents/Resources//frag.spv"
-	$(CMAKE_COMMAND) -E copy /Users/sergiumanoliu/GameEngine1/EngineAttempt/frag.spv myengine.app/Contents/Resources//frag.spv
-
-CMakeFiles/myengine.dir/tests.cpp.o: CMakeFiles/myengine.dir/flags.make
-CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp
-CMakeFiles/myengine.dir/tests.cpp.o: CMakeFiles/myengine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/myengine.dir/tests.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myengine.dir/tests.cpp.o -MF CMakeFiles/myengine.dir/tests.cpp.o.d -o CMakeFiles/myengine.dir/tests.cpp.o -c /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp
-
-CMakeFiles/myengine.dir/tests.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/myengine.dir/tests.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp > CMakeFiles/myengine.dir/tests.cpp.i
-
-CMakeFiles/myengine.dir/tests.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/myengine.dir/tests.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp -o CMakeFiles/myengine.dir/tests.cpp.s
+myengine.app/Contents/Resources/frag.spv: /Users/sergiumanoliu/GameEngine1/EngineAttempt/frag.spv
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Copying OS X content myengine.app/Contents/Resources/frag.spv"
+	$(CMAKE_COMMAND) -E copy /Users/sergiumanoliu/GameEngine1/EngineAttempt/frag.spv myengine.app/Contents/Resources/frag.spv
 
 CMakeFiles/myengine.dir/src/volk.c.o: CMakeFiles/myengine.dir/flags.make
 CMakeFiles/myengine.dir/src/volk.c.o: /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/volk.c
 CMakeFiles/myengine.dir/src/volk.c.o: CMakeFiles/myengine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/myengine.dir/src/volk.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/myengine.dir/src/volk.c.o"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/myengine.dir/src/volk.c.o -MF CMakeFiles/myengine.dir/src/volk.c.o.d -o CMakeFiles/myengine.dir/src/volk.c.o -c /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/volk.c
 
 CMakeFiles/myengine.dir/src/volk.c.i: cmake_force
@@ -108,16 +94,30 @@ CMakeFiles/myengine.dir/src/volk.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/myengine.dir/src/volk.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/volk.c -o CMakeFiles/myengine.dir/src/volk.c.s
 
+CMakeFiles/myengine.dir/tests.cpp.o: CMakeFiles/myengine.dir/flags.make
+CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp
+CMakeFiles/myengine.dir/tests.cpp.o: CMakeFiles/myengine.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/myengine.dir/tests.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/myengine.dir/tests.cpp.o -MF CMakeFiles/myengine.dir/tests.cpp.o.d -o CMakeFiles/myengine.dir/tests.cpp.o -c /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp
+
+CMakeFiles/myengine.dir/tests.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/myengine.dir/tests.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp > CMakeFiles/myengine.dir/tests.cpp.i
+
+CMakeFiles/myengine.dir/tests.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/myengine.dir/tests.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/sergiumanoliu/GameEngine1/EngineAttempt/tests.cpp -o CMakeFiles/myengine.dir/tests.cpp.s
+
 # Object files for target myengine
 myengine_OBJECTS = \
-"CMakeFiles/myengine.dir/tests.cpp.o" \
-"CMakeFiles/myengine.dir/src/volk.c.o"
+"CMakeFiles/myengine.dir/src/volk.c.o" \
+"CMakeFiles/myengine.dir/tests.cpp.o"
 
 # External object files for target myengine
 myengine_EXTERNAL_OBJECTS =
 
-myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/tests.cpp.o
 myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/src/volk.c.o
+myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/tests.cpp.o
 myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/build.make
 myengine.app/Contents/MacOS/myengine: /Users/sergiumanoliu/SDL/SDL/sdl_install/./SDL3.framework/Versions/A/SDL3
 myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/link.txt
@@ -126,8 +126,8 @@ myengine.app/Contents/MacOS/myengine: CMakeFiles/myengine.dir/link.txt
 
 # Rule to build all files generated by this target.
 CMakeFiles/myengine.dir/build: myengine.app/Contents/MacOS/myengine
-CMakeFiles/myengine.dir/build: myengine.app/Contents/Resources//frag.spv
-CMakeFiles/myengine.dir/build: myengine.app/Contents/Resources//vert.spv
+CMakeFiles/myengine.dir/build: myengine.app/Contents/Resources/frag.spv
+CMakeFiles/myengine.dir/build: myengine.app/Contents/Resources/vert.spv
 .PHONY : CMakeFiles/myengine.dir/build
 
 CMakeFiles/myengine.dir/clean:

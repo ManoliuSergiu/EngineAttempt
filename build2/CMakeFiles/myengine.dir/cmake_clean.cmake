@@ -4,8 +4,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/myengine.dir/tests.cpp.o"
   "CMakeFiles/myengine.dir/tests.cpp.o.d"
   "myengine.app/Contents/MacOS/myengine"
-  "myengine.app/Contents/Resources//frag.spv"
-  "myengine.app/Contents/Resources//vert.spv"
+  "myengine.app/Contents/Resources/frag.spv"
+  "myengine.app/Contents/Resources/vert.spv"
   "myengine.pdb"
 )
 

@@ -122,18 +122,34 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
 // The actual data
 
 // Helper to read binary files
-std::vector<char> readFile(const std::string& filename) {
-    std::ifstream file(filename, std::ios::ate | std::ios::binary);
+std::vector<char> readFile(const std::string& filename){ 
+    // 1. Get the base path where the executable/resources are
+    const char* basePath = SDL_GetBasePath();
+    if (!basePath) {
+        // Fallback for safety, though SDL_Init usually handles this
+        basePath = ""; 
+    }
+
+    std::string fullPath = std::string(basePath) + filename;
+    
+    // 2. Open file (ate = at the end, to get size easily)
+    std::ifstream file(fullPath, std::ios::ate | std::ios::binary);
+
     if (!file.is_open()) {
+        SDL_Log("CRITICAL: Failed to open file: %s", fullPath.c_str());
         throw std::runtime_error("failed to open file!");
     }
+
     size_t fileSize = (size_t)file.tellg();
     std::vector<char> buffer(fileSize);
+
     file.seekg(0);
     file.read(buffer.data(), fileSize);
     file.close();
+
     return buffer;
 }
+
 
 
 // A. Find valid memory type (Host Visible vs Device Local)
@@ -667,6 +683,40 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     swapChainExtent = extent;
     
     SDL_Log("Swapchain Created! Images: %d, Size: %dx%d", imageCount, extent.width, extent.height);
+    
+    
+    // ---------------------------------------------------------
+    // STEP 5: CREATE IMAGE VIEWS (You were missing this!)
+    // ---------------------------------------------------------
+    swapChainImageViews.resize(swapChainImages.size());
+
+    for (size_t i = 0; i < swapChainImages.size(); i++) {
+        VkImageViewCreateInfo createInfo{};
+        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        createInfo.image = swapChainImages[i];
+        createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        createInfo.format = swapChainImageFormat;
+        
+        // Map colors normally (R -> R, G -> G, etc.)
+        createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+        createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+        
+        // Describe the image part we want to access
+        createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        createInfo.subresourceRange.baseMipLevel = 0;
+        createInfo.subresourceRange.levelCount = 1;
+        createInfo.subresourceRange.baseArrayLayer = 0;
+        createInfo.subresourceRange.layerCount = 1;
+
+        if (vkCreateImageView(device, &createInfo, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
+            SDL_Log("Failed to create image views!");
+            return SDL_APP_FAILURE;
+        }
+    }
+    
+    SDL_Log("Step 5: Image Views Created Successfully! Count: %zu", swapChainImageViews.size());;
     // ---------------------------------------------------------
     // STEP 6: CREATE RENDER PASS
     // ---------------------------------------------------------
@@ -744,12 +794,19 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
         VkFramebufferCreateInfo framebufferInfo{};
         framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-        framebufferInfo.renderPass = renderPass; // "This FB is compatible with this Render Pass"
+        framebufferInfo.renderPass = renderPass; // Link to the render pass we just created
         framebufferInfo.attachmentCount = 1;
         framebufferInfo.pAttachments = attachments;
         framebufferInfo.width = swapChainExtent.width;
         framebufferInfo.height = swapChainExtent.height;
         framebufferInfo.layers = 1;
+
+        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
+            SDL_Log("Failed to create framebuffer %zu!", i);
+            return SDL_APP_FAILURE;
+        }
+    
+    SDL_Log("Step 7: Framebuffers Created Successfully! Count: %zu", swapChainFramebuffers.size());
 
         if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
             SDL_Log("Failed to create framebuffer!");
@@ -859,7 +916,9 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
         vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
-        
+        VkBuffer vertexBuffers[] = {vertexBuffer}; // Make sure 'vertexBuffer' is your global buffer handle
+        VkDeviceSize offsets[] = {0};
+        vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
         // DRAW 3 VERTICES (The Triangle hardcoded in shader)
         vkCmdDraw(commandBuffer, 3, 1, 0, 0);
         
