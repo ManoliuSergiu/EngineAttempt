@@ -1,0 +1,9 @@
+{
+	"InstallScripts" : 
+	[
+		"F:/GameEngine/build/cmake_install.cmake",
+		"F:/GameEngine/build/_deps/glm-build/cmake_install.cmake",
+		"F:/GameEngine/build/_deps/glm-build/glm/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

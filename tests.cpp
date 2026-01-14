@@ -143,7 +143,7 @@ std::vector<Vertex> loadGLTF(const std::string& filename) {
 
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
-                v.pos*=0.1;
+                //v.pos*=0.1;
                 // 2. Read Color (vec3) - Optional, default to White if missing
                 if (colorAccessor) {
                     cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
@@ -1029,7 +1029,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     renderPassInfo.renderArea.offset = {0, 0};
     renderPassInfo.renderArea.extent = swapChainExtent;
 
-    VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 1.0f}}}; // Black Background
+    VkClearValue clearColor = {{{1.0f, 0.0f, 0.0f, 1.0f}}}; // Black Background
     renderPassInfo.clearValueCount = 1;
     renderPassInfo.pClearValues = &clearColor;
 
@@ -1050,7 +1050,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         glm::mat4 model = glm::mat4(1.0f);
         
         // Scale it down just in case the model is HUGE
-        model = glm::scale(model, glm::vec3(0.01f)); 
+        model = glm::scale(model, glm::vec3(1.0f)); 
 
         glm::mat4 meshMatrix = projection * view * model;
         vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
