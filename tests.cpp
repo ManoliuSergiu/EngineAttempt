@@ -143,12 +143,12 @@ std::vector<Vertex> loadGLTF(const std::string& filename) {
 
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
-
+                v.pos*=0.01;
                 // 2. Read Color (vec3) - Optional, default to White if missing
                 if (colorAccessor) {
                     cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
                 } else {
-                    v.color = {1.0f, 1.0f, 1.0f}; // White default
+                    v.color = {.5f, .5f, .5f}; // White default
                 }
 
                 outputVertices.push_back(v);
@@ -390,7 +390,18 @@ void createGraphicsPipeline() {
     pipelineInfo.layout = pipelineLayout;
     pipelineInfo.renderPass = renderPass; // Compatible with our render pass
     pipelineInfo.subpass = 0;
-    
+   // Add this struct definition
+    VkPipelineDepthStencilStateCreateInfo depthStencil{};
+    depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
+    depthStencil.depthTestEnable = VK_TRUE;  // Check Z
+    depthStencil.depthWriteEnable = VK_TRUE; // Write Z
+    depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // "Closer" replaces "Farther"
+    depthStencil.depthBoundsTestEnable = VK_FALSE;
+    depthStencil.stencilTestEnable = VK_FALSE;
+
+    // ...
+    pipelineInfo.pDepthStencilState = &depthStencil; // <--- ADD THIS LINE
+    // ... 
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
         SDL_Log("Graphics Pipeline failed creation!");
     }
