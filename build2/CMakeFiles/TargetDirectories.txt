@@ -1,8 +1,0 @@
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/myengine.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/edit_cache.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/CMakeFiles/rebuild_cache.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/CMakeFiles/edit_cache.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/CMakeFiles/rebuild_cache.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/glm/CMakeFiles/glm.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/glm/CMakeFiles/edit_cache.dir
-/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/glm/CMakeFiles/rebuild_cache.dir
