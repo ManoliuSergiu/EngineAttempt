@@ -23,10 +23,15 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Compiler/Clang-OBJC.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Compiler/Clang.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Compiler/GNU.cmake"
+  "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/ExternalProject/shared_internal_commands.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FeatureSummary.cmake"
+  "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FetchContent.cmake"
+  "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FetchContent/CMakeLists.cmake.in"
+  "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FindGit.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FindPackageHandleStandardArgs.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FindPackageMessage.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/FindVulkan.cmake"
+  "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/GNUInstallDirs.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeCLinkerInformation.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/Applications/CMake.app/Contents/share/cmake-4.0/Modules/Internal/CMakeCommonLinkerInformation.cmake"
@@ -55,6 +60,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/4.0.0-rc4/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.0.0-rc4/CMakeOBJCCompiler.cmake"
   "CMakeFiles/4.0.0-rc4/CMakeSystem.cmake"
+  "_deps/glm-src/CMakeLists.txt"
+  "_deps/glm-src/glm/CMakeLists.txt"
   "/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Resources/CMake/SDL3Config.cmake"
   "/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Resources/CMake/SDL3ConfigVersion.cmake"
   "/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Resources/CMake/SDL3headersTargets.cmake"
@@ -72,13 +79,18 @@ set(CMAKE_MAKEFILE_OUTPUTS
 
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
+  "_deps/glm-subbuild/CMakeLists.txt"
+  "_deps/cgltf-subbuild/CMakeLists.txt"
   "myengine.app/Contents/MacOS"
   "myengine.app/Contents/Info.plist"
   "myengine.app/Contents/Info.plist"
   "CMakeFiles/CMakeDirectoryInformation.cmake"
+  "_deps/glm-build/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "_deps/glm-build/glm/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/myengine.dir/DependInfo.cmake"
+  "_deps/glm-build/glm/CMakeFiles/glm.dir/DependInfo.cmake"
   )

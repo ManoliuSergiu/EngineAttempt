@@ -124,6 +124,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/limits.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/ptrcheck.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdarg.h \
+  /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdbool.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stddef.h \
   /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdint.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -776,6 +777,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ratio \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdbool.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdexcept \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdint.h \
@@ -927,6 +929,279 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_time.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wchar.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wctype.h \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/cgltf.h \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_vectorize.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_exponential.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_vector_relational.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec1.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_fixes.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_vectorize.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_common.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_geometric.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec1.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec1.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x3.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x4.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x2.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x4.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x2.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x3.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_matrix.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_vectorize.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_decl.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x2.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_int_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_uint_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float2_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float3_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float4_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int2_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int3_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int4_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint2_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint3_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint4_sized.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/simd/platform.h \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_fixes.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_vectorize.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_integer.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_packing.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_trigonometric.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_half.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_half.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/fwd.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/glm.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_relational.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/trigonometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_float.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_quat.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_quat.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/trigonometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_clip_space.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_clip_space.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_projection.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_projection.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_transform.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_transform.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_common.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_common.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_double.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_double_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_float.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_float_precision.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_transform.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_transform.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_trigonometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_trigonometric.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/trigonometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/epsilon.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/epsilon.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/quaternion.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/quaternion.inl \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/integer.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/packing.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/trigonometric.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec2.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec3.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec4.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/ufbx.c \
+  /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/ufbx.h \
   /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/volk.h \
   /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL.h \
   /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_assert.h \
@@ -991,276 +1266,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
   /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_version.h \
   /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_video.h \
   /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_vulkan.h \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
-  /usr/local/include/glm/detail/_vectorize.hpp \
-  /usr/local/include/glm/detail/func_exponential.inl \
-  /usr/local/include/glm/detail/func_vector_relational.inl \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_vec1.hpp \
-  /usr/local/include/glm/detail/type_vec2.hpp \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
-  /usr/local/include/glm/detail/compute_vector_relational.hpp \
-  /usr/local/include/glm/detail/_fixes.hpp \
-  /usr/local/include/glm/detail/_vectorize.hpp \
-  /usr/local/include/glm/detail/compute_common.hpp \
-  /usr/local/include/glm/detail/func_common.inl \
-  /usr/local/include/glm/detail/func_geometric.inl \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_vec1.hpp \
-  /usr/local/include/glm/detail/type_vec1.inl \
-  /usr/local/include/glm/detail/type_vec2.hpp \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/matrix.hpp \
-  /usr/local/include/glm/detail/type_mat2x2.hpp \
-  /usr/local/include/glm/detail/type_mat2x3.hpp \
-  /usr/local/include/glm/detail/type_mat2x3.inl \
-  /usr/local/include/glm/detail/type_mat2x4.hpp \
-  /usr/local/include/glm/detail/type_mat2x4.inl \
-  /usr/local/include/glm/detail/type_mat3x2.hpp \
-  /usr/local/include/glm/detail/type_mat3x2.inl \
-  /usr/local/include/glm/detail/type_mat3x3.hpp \
-  /usr/local/include/glm/detail/type_mat3x3.inl \
-  /usr/local/include/glm/detail/type_mat3x4.hpp \
-  /usr/local/include/glm/detail/type_mat3x4.inl \
-  /usr/local/include/glm/detail/type_mat4x2.hpp \
-  /usr/local/include/glm/detail/type_mat4x2.inl \
-  /usr/local/include/glm/detail/type_mat4x3.hpp \
-  /usr/local/include/glm/detail/type_mat4x3.inl \
-  /usr/local/include/glm/detail/type_mat4x4.hpp \
-  /usr/local/include/glm/detail/type_mat4x4.inl \
-  /usr/local/include/glm/detail/type_vec2.hpp \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/ext/matrix_double2x3.hpp \
-  /usr/local/include/glm/ext/matrix_double2x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double2x4.hpp \
-  /usr/local/include/glm/ext/matrix_double2x4_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double3x2.hpp \
-  /usr/local/include/glm/ext/matrix_double3x2_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double3x3.hpp \
-  /usr/local/include/glm/ext/matrix_double3x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double3x4.hpp \
-  /usr/local/include/glm/ext/matrix_double3x4_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double4x2.hpp \
-  /usr/local/include/glm/ext/matrix_double4x2_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double4x3.hpp \
-  /usr/local/include/glm/ext/matrix_double4x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_double4x4.hpp \
-  /usr/local/include/glm/ext/matrix_double4x4_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float2x3.hpp \
-  /usr/local/include/glm/ext/matrix_float2x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float2x4.hpp \
-  /usr/local/include/glm/ext/matrix_float2x4_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float3x2.hpp \
-  /usr/local/include/glm/ext/matrix_float3x2_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float3x3.hpp \
-  /usr/local/include/glm/ext/matrix_float3x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float3x4.hpp \
-  /usr/local/include/glm/ext/matrix_float3x4_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float4x2.hpp \
-  /usr/local/include/glm/ext/matrix_float4x2_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float4x3.hpp \
-  /usr/local/include/glm/ext/matrix_float4x3_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float4x4.hpp \
-  /usr/local/include/glm/ext/matrix_float4x4_precision.hpp \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/detail/func_matrix.inl \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/mat2x2.hpp \
-  /usr/local/include/glm/mat2x3.hpp \
-  /usr/local/include/glm/mat2x4.hpp \
-  /usr/local/include/glm/mat3x2.hpp \
-  /usr/local/include/glm/mat3x3.hpp \
-  /usr/local/include/glm/mat3x4.hpp \
-  /usr/local/include/glm/mat4x2.hpp \
-  /usr/local/include/glm/mat4x3.hpp \
-  /usr/local/include/glm/mat4x4.hpp \
-  /usr/local/include/glm/matrix.hpp \
-  /usr/local/include/glm/vec2.hpp \
-  /usr/local/include/glm/vec3.hpp \
-  /usr/local/include/glm/vec4.hpp \
-  /usr/local/include/glm/detail/compute_vector_relational.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/_vectorize.hpp \
-  /usr/local/include/glm/detail/compute_vector_decl.hpp \
-  /usr/local/include/glm/detail/compute_vector_relational.hpp \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_mat2x2.hpp \
-  /usr/local/include/glm/detail/type_mat2x2.inl \
-  /usr/local/include/glm/detail/type_vec2.hpp \
-  /usr/local/include/glm/detail/type_vec2.inl \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec3.inl \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/detail/type_vec4.inl \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/ext/scalar_int_sized.hpp \
-  /usr/local/include/glm/ext/scalar_uint_sized.hpp \
-  /usr/local/include/glm/ext/vector_int2.hpp \
-  /usr/local/include/glm/ext/vector_int3.hpp \
-  /usr/local/include/glm/ext/vector_int4.hpp \
-  /usr/local/include/glm/ext/vector_uint2.hpp \
-  /usr/local/include/glm/ext/vector_uint3.hpp \
-  /usr/local/include/glm/ext/vector_uint4.hpp \
-  /usr/local/include/glm/ext/matrix_double2x2.hpp \
-  /usr/local/include/glm/ext/matrix_double2x2_precision.hpp \
-  /usr/local/include/glm/ext/matrix_float2x2.hpp \
-  /usr/local/include/glm/ext/matrix_float2x2_precision.hpp \
-  /usr/local/include/glm/ext/vector_bool2.hpp \
-  /usr/local/include/glm/ext/vector_bool2_precision.hpp \
-  /usr/local/include/glm/ext/vector_bool3.hpp \
-  /usr/local/include/glm/ext/vector_bool3_precision.hpp \
-  /usr/local/include/glm/ext/vector_bool4.hpp \
-  /usr/local/include/glm/ext/vector_bool4_precision.hpp \
-  /usr/local/include/glm/ext/vector_double2.hpp \
-  /usr/local/include/glm/ext/vector_double2_precision.hpp \
-  /usr/local/include/glm/ext/vector_double3.hpp \
-  /usr/local/include/glm/ext/vector_double3_precision.hpp \
-  /usr/local/include/glm/ext/vector_double4.hpp \
-  /usr/local/include/glm/ext/vector_double4_precision.hpp \
-  /usr/local/include/glm/ext/vector_float2.hpp \
-  /usr/local/include/glm/ext/vector_float2_precision.hpp \
-  /usr/local/include/glm/ext/vector_float3.hpp \
-  /usr/local/include/glm/ext/vector_float3_precision.hpp \
-  /usr/local/include/glm/ext/vector_float4.hpp \
-  /usr/local/include/glm/ext/vector_float4_precision.hpp \
-  /usr/local/include/glm/ext/vector_int2.hpp \
-  /usr/local/include/glm/ext/vector_int2_sized.hpp \
-  /usr/local/include/glm/ext/vector_int3.hpp \
-  /usr/local/include/glm/ext/vector_int3_sized.hpp \
-  /usr/local/include/glm/ext/vector_int4.hpp \
-  /usr/local/include/glm/ext/vector_int4_sized.hpp \
-  /usr/local/include/glm/ext/vector_uint2.hpp \
-  /usr/local/include/glm/ext/vector_uint2_sized.hpp \
-  /usr/local/include/glm/ext/vector_uint3.hpp \
-  /usr/local/include/glm/ext/vector_uint3_sized.hpp \
-  /usr/local/include/glm/ext/vector_uint4.hpp \
-  /usr/local/include/glm/ext/vector_uint4_sized.hpp \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/simd/platform.h \
-  /usr/local/include/glm/detail/_fixes.hpp \
-  /usr/local/include/glm/detail/_vectorize.hpp \
-  /usr/local/include/glm/detail/func_integer.inl \
-  /usr/local/include/glm/detail/func_packing.inl \
-  /usr/local/include/glm/detail/func_trigonometric.inl \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_half.hpp \
-  /usr/local/include/glm/detail/type_half.inl \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/fwd.hpp \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/glm.hpp \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_mat3x3.hpp \
-  /usr/local/include/glm/detail/type_mat4x4.hpp \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/common.hpp \
-  /usr/local/include/glm/detail/type_mat3x3.hpp \
-  /usr/local/include/glm/detail/type_mat4x4.hpp \
-  /usr/local/include/glm/detail/type_vec3.hpp \
-  /usr/local/include/glm/detail/type_vec4.hpp \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
-  /usr/local/include/glm/ext/quaternion_common.hpp \
-  /usr/local/include/glm/ext/quaternion_geometric.hpp \
-  /usr/local/include/glm/ext/quaternion_relational.hpp \
-  /usr/local/include/glm/ext/quaternion_relational.inl \
-  /usr/local/include/glm/ext/vector_relational.hpp \
-  /usr/local/include/glm/gtc/constants.hpp \
-  /usr/local/include/glm/gtc/matrix_transform.hpp \
-  /usr/local/include/glm/trigonometric.hpp \
-  /usr/local/include/glm/detail/qualifier.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/detail/type_float.hpp \
-  /usr/local/include/glm/detail/type_quat.hpp \
-  /usr/local/include/glm/detail/type_quat.inl \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/exponential.hpp \
-  /usr/local/include/glm/ext/vector_relational.hpp \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/ext/quaternion_geometric.hpp \
-  /usr/local/include/glm/ext/quaternion_geometric.inl \
-  /usr/local/include/glm/ext/scalar_constants.hpp \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/detail/setup.hpp \
-  /usr/local/include/glm/ext/scalar_constants.hpp \
-  /usr/local/include/glm/ext/scalar_constants.inl \
-  /usr/local/include/glm/gtc/constants.hpp \
-  /usr/local/include/glm/gtc/constants.inl \
-  /usr/local/include/glm/matrix.hpp \
-  /usr/local/include/glm/trigonometric.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
-  /usr/local/include/glm/ext/matrix_clip_space.hpp \
-  /usr/local/include/glm/ext/matrix_clip_space.inl \
-  /usr/local/include/glm/ext/matrix_projection.hpp \
-  /usr/local/include/glm/ext/matrix_projection.inl \
-  /usr/local/include/glm/ext/matrix_transform.hpp \
-  /usr/local/include/glm/ext/matrix_transform.inl \
-  /usr/local/include/glm/ext/quaternion_common.hpp \
-  /usr/local/include/glm/ext/quaternion_common.inl \
-  /usr/local/include/glm/ext/quaternion_double.hpp \
-  /usr/local/include/glm/ext/quaternion_double_precision.hpp \
-  /usr/local/include/glm/ext/quaternion_float.hpp \
-  /usr/local/include/glm/ext/quaternion_float_precision.hpp \
-  /usr/local/include/glm/ext/quaternion_geometric.hpp \
-  /usr/local/include/glm/ext/quaternion_relational.hpp \
-  /usr/local/include/glm/ext/quaternion_transform.hpp \
-  /usr/local/include/glm/ext/quaternion_transform.inl \
-  /usr/local/include/glm/ext/quaternion_trigonometric.hpp \
-  /usr/local/include/glm/ext/quaternion_trigonometric.inl \
-  /usr/local/include/glm/ext/scalar_constants.hpp \
-  /usr/local/include/glm/ext/vector_relational.hpp \
-  /usr/local/include/glm/ext/vector_relational.inl \
-  /usr/local/include/glm/geometric.hpp \
-  /usr/local/include/glm/gtc/constants.hpp \
-  /usr/local/include/glm/gtc/matrix_transform.hpp \
-  /usr/local/include/glm/mat4x4.hpp \
-  /usr/local/include/glm/matrix.hpp \
-  /usr/local/include/glm/trigonometric.hpp \
-  /usr/local/include/glm/vec2.hpp \
-  /usr/local/include/glm/vec3.hpp \
-  /usr/local/include/glm/vec4.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
-  /usr/local/include/glm/gtc/epsilon.hpp \
-  /usr/local/include/glm/gtc/epsilon.inl \
-  /usr/local/include/glm/gtc/matrix_transform.hpp \
-  /usr/local/include/glm/gtc/matrix_transform.inl \
-  /usr/local/include/glm/gtc/quaternion.hpp \
-  /usr/local/include/glm/gtc/quaternion.inl \
-  /usr/local/include/glm/integer.hpp \
-  /usr/local/include/glm/mat2x2.hpp \
-  /usr/local/include/glm/mat2x3.hpp \
-  /usr/local/include/glm/mat2x4.hpp \
-  /usr/local/include/glm/mat3x2.hpp \
-  /usr/local/include/glm/mat3x3.hpp \
-  /usr/local/include/glm/mat3x4.hpp \
-  /usr/local/include/glm/mat4x2.hpp \
-  /usr/local/include/glm/mat4x3.hpp \
-  /usr/local/include/glm/mat4x4.hpp \
-  /usr/local/include/glm/matrix.hpp \
-  /usr/local/include/glm/packing.hpp \
-  /usr/local/include/glm/trigonometric.hpp \
-  /usr/local/include/glm/vec2.hpp \
-  /usr/local/include/glm/vec3.hpp \
-  /usr/local/include/glm/vec4.hpp \
-  /usr/local/include/glm/vector_relational.hpp \
   /usr/local/include/vk_video/vulkan_video_codec_av1std.h \
   /usr/local/include/vk_video/vulkan_video_codec_av1std_decode.h \
   /usr/local/include/vk_video/vulkan_video_codec_av1std_encode.h \
@@ -1277,188 +1282,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
   /usr/local/include/vulkan/vulkan.h \
   /usr/local/include/vulkan/vulkan_core.h
 
-
-/usr/local/include/glm/integer.hpp:
-
-/usr/local/include/glm/gtc/quaternion.inl:
-
-/usr/local/include/glm/ext/vector_relational.inl:
-
-/usr/local/include/glm/ext/quaternion_trigonometric.inl:
-
-/usr/local/include/glm/ext/quaternion_trigonometric.hpp:
-
-/usr/local/include/glm/ext/quaternion_transform.hpp:
-
-/usr/local/include/glm/ext/quaternion_double.hpp:
-
-/usr/local/include/glm/ext/matrix_transform.inl:
-
-/usr/local/include/glm/ext/matrix_transform.hpp:
-
-/usr/local/include/glm/gtc/constants.inl:
-
-/usr/local/include/glm/detail/type_quat.hpp:
-
-/usr/local/include/glm/trigonometric.hpp:
-
-/usr/local/include/glm/gtc/epsilon.inl:
-
-/usr/local/include/glm/gtc/constants.hpp:
-
-/usr/local/include/glm/ext/quaternion_geometric.hpp:
-
-/usr/local/include/glm/ext/quaternion_common.hpp:
-
-/usr/local/include/glm/glm.hpp:
-
-/usr/local/include/glm/fwd.hpp:
-
-/usr/local/include/glm/detail/type_half.inl:
-
-/usr/local/include/glm/detail/type_half.hpp:
-
-/usr/local/include/glm/ext/vector_uint2_sized.hpp:
-
-/usr/local/include/glm/ext/vector_int2_sized.hpp:
-
-/usr/local/include/glm/ext/vector_float3.hpp:
-
-/usr/local/include/glm/ext/vector_float2_precision.hpp:
-
-/usr/local/include/glm/ext/vector_float2.hpp:
-
-/usr/local/include/glm/ext/vector_double4_precision.hpp:
-
-/usr/local/include/glm/ext/vector_double4.hpp:
-
-/usr/local/include/glm/ext/vector_double3_precision.hpp:
-
-/usr/local/include/glm/ext/vector_double2_precision.hpp:
-
-/usr/local/include/glm/ext/vector_bool3_precision.hpp:
-
-/usr/local/include/glm/ext/vector_bool2_precision.hpp:
-
-/usr/local/include/glm/ext/vector_bool2.hpp:
-
-/usr/local/include/glm/ext/matrix_float2x2.hpp:
-
-/usr/local/include/glm/ext/matrix_double2x2.hpp:
-
-/usr/local/include/glm/ext/vector_uint2.hpp:
-
-/usr/local/include/glm/ext/vector_int3.hpp:
-
-/usr/local/include/glm/ext/vector_int2.hpp:
-
-/usr/local/include/glm/ext/scalar_uint_sized.hpp:
-
-/usr/local/include/glm/ext/scalar_int_sized.hpp:
-
-/usr/local/include/glm/detail/type_vec2.inl:
-
-/usr/local/include/glm/detail/type_mat2x2.inl:
-
-/usr/local/include/glm/detail/compute_vector_decl.hpp:
-
-/usr/local/include/glm/vec4.hpp:
-
-/usr/local/include/glm/vec2.hpp:
-
-/usr/local/include/glm/mat4x4.hpp:
-
-/usr/local/include/glm/mat4x3.hpp:
-
-/usr/local/include/glm/mat3x3.hpp:
-
-/usr/local/include/glm/mat3x2.hpp:
-
-/usr/local/include/glm/detail/func_matrix.inl:
-
-/usr/local/include/glm/ext/matrix_float4x4.hpp:
-
-/usr/local/include/glm/ext/matrix_float4x3.hpp:
-
-/usr/local/include/glm/ext/matrix_float4x2_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_float4x2.hpp:
-
-/usr/local/include/glm/ext/matrix_float3x4_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_float3x3_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_float3x3.hpp:
-
-/usr/local/include/glm/ext/matrix_float3x2_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_float2x4_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_float2x3_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_double4x4_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_double4x3_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_double3x2_precision.hpp:
-
-/usr/local/include/glm/ext/matrix_double3x2.hpp:
-
-/usr/local/include/glm/ext/matrix_double2x4.hpp:
-
-/usr/local/include/glm/ext/matrix_double2x3_precision.hpp:
-
-/usr/local/include/glm/detail/type_mat4x4.inl:
-
-/usr/local/include/glm/detail/type_mat4x4.hpp:
-
-/usr/local/include/glm/detail/type_mat4x3.hpp:
-
-/usr/local/include/glm/detail/type_mat4x2.inl:
-
-/usr/local/include/glm/detail/type_mat3x4.inl:
-
-/usr/local/include/glm/detail/type_mat3x2.inl:
-
-/usr/local/include/glm/detail/type_mat3x2.hpp:
-
-/usr/local/include/glm/detail/type_mat2x4.inl:
-
-/usr/local/include/glm/detail/type_mat2x3.inl:
-
-/usr/local/include/glm/matrix.hpp:
-
-/usr/local/include/glm/ext/matrix_projection.hpp:
-
-/usr/local/include/glm/geometric.hpp:
-
-/usr/local/include/glm/ext/matrix_float2x3.hpp:
-
-/usr/local/include/glm/detail/type_vec1.inl:
-
-/usr/local/include/glm/detail/func_geometric.inl:
-
-/usr/local/include/glm/ext/vector_int4_sized.hpp:
-
-/usr/local/include/glm/detail/compute_common.hpp:
-
-/usr/local/include/glm/detail/_fixes.hpp:
-
-/usr/local/include/glm/detail/type_vec3.hpp:
-
-/usr/local/include/glm/ext/vector_bool4_precision.hpp:
-
-/usr/local/include/glm/detail/type_vec2.hpp:
-
-/usr/local/include/glm/detail/setup.hpp:
-
-/usr/local/include/glm/detail/func_vector_relational.inl:
-
-/usr/local/include/glm/detail/_vectorize.hpp:
-
-/usr/local/include/glm/vector_relational.hpp:
-
-/usr/local/include/glm/common.hpp:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_vulkan.h:
 
@@ -1478,25 +1301,17 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_platform_defines.h:
 
-/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_pixels.h:
-
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_oldnames.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_mutex.h:
-
-/usr/local/include/glm/detail/type_quat.inl:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_mouse.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_log.h:
 
-/usr/local/include/glm/ext/matrix_projection.inl:
-
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_locale.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_keyboard.h:
-
-/usr/local/include/glm/ext/quaternion_geometric.inl:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_iostream.h:
 
@@ -1526,17 +1341,201 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_asyncio.h:
 
-/usr/local/include/glm/ext/vector_uint4_sized.hpp:
-
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_assert.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/ufbx.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/packing.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/quaternion.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/epsilon.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_trigonometric.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_transform.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_transform.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_float_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_float.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_double.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_common.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_projection.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_clip_space.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_clip_space.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_quat.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/trigonometric.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_common.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_half.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_trigonometric.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_integer.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint4_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint3_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint2_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int3_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int2_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_uint_sized.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x2.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_decl.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vec2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x3.hpp:
+
+/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_pixels.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat4x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x3_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x4_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x4.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x3.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/constants.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x2.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x4.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x3.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x3.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x2.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/matrix.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/geometric.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_geometric.inl:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_fixes.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec1.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/vector_relational.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_wchar.h:
-
-/usr/local/include/glm/detail/type_vec4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_string.h:
 
@@ -1548,8 +1547,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale.h:
 
-/usr/local/include/glm/detail/type_mat2x2.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/wctype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/time.h:
@@ -1557,6 +1554,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/syslimits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/stdio.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/qos.h:
 
@@ -1580,7 +1579,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_key_t.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint4.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_ino64_t.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/epsilon.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_in_port_t.h:
 
@@ -1590,11 +1593,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_setsize.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_set.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_caddr_t.h:
 
-/usr/local/include/glm/ext/vector_double2.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_vector_relational.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_cond_t.h:
 
@@ -1606,6 +1611,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/wctype.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x4.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/version:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/types.h:
@@ -1615,8 +1622,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_void.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/variant:
-
-/usr/local/include/glm/detail/type_vec3.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/typeinfo:
 
@@ -1634,11 +1639,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/tuple:
 
-/usr/local/include/glm/simd/platform.h:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool2_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/perm_options.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdio.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_transform.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdint.h:
 
@@ -1651,8 +1658,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/stack.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/optional:
-
-/usr/local/include/glm/ext/matrix_double2x2_precision.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stdarg___gnuc_va_list.h:
 
@@ -1669,8 +1674,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /usr/local/include/vk_video/vulkan_video_codec_h265std.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/functional:
-
-/usr/local/include/glm/ext/matrix_double3x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/set:
 
@@ -1692,6 +1695,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cwctype:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/fwd.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdio:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstdint:
@@ -1700,15 +1705,17 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cctype:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x4.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cassert:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bit:
 
-/usr/local/include/glm/ext/vector_int3_sized.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/algorithm:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__verbose_abort:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/back_insert_iterator.h:
 
@@ -1730,8 +1737,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/scope_guard.h:
 
-/usr/local/include/glm/ext/vector_float3_precision.hpp:
-
 /usr/local/include/vk_video/vulkan_video_codecs_common.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/piecewise_construct.h:
@@ -1742,13 +1747,9 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/no_destroy.h:
 
-/usr/local/include/glm/detail/func_common.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/push_heap.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string:
-
-/usr/local/include/glm/detail/type_mat2x3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/detected_or.h:
 
@@ -1757,6 +1758,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/fill_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/is_pointer_in_range.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/integer_sequence.h:
 
@@ -1767,6 +1770,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/as_const.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/void_t.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x3.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/underlying_type.h:
 
@@ -1832,8 +1837,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_reference.h:
 
-/usr/local/include/glm/ext/matrix_clip_space.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_primary_template.h:
@@ -1844,11 +1847,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_pointer.h:
 
-/usr/local/include/glm/ext/matrix_double4x3.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/regular.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_pod.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_null_pointer.h:
 
@@ -1859,8 +1862,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_hidapi.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_member_pointer.h:
-
-/usr/local/include/glm/ext/matrix_double2x4_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_in_addr_t.h:
 
@@ -1878,11 +1879,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_function.h:
 
-/usr/local/include/glm/mat2x2.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_key_t.h:
-
-/usr/local/include/glm/ext/vector_float4.hpp:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_power.h:
 
@@ -1916,15 +1913,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/is_valid_range.h:
 
-/usr/local/include/glm/gtc/quaternion.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/byte.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_compound.h:
 
-/usr/local/include/glm/detail/func_integer.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_char_like_type.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_base_of.h:
 
@@ -1954,9 +1949,15 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_object.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/_vectorize.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/desugars_to.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_relational.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/datasizeof.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_geometric.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/generate.h:
 
@@ -1989,8 +1990,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/rotate_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/aligned_storage.h:
-
-/usr/local/include/glm/ext/quaternion_relational.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_array.h:
 
@@ -2036,21 +2035,21 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/throw_system_error.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_relational.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/system_error.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_empty.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/error_condition.h:
 
-/usr/local/include/glm/detail/type_mat4x3.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/error_category.h:
-
-/usr/local/include/glm/ext/quaternion_float.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstring:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x2_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__system_error/errc.h:
 
@@ -2077,6 +2076,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/memory_order.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/data.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x4_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/comp.h:
 
@@ -2120,6 +2121,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/interference_size.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/global_new_delete.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/exceptions.h:
@@ -2160,8 +2163,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/array_cookie.h:
 
-/usr/local/include/glm/ext/matrix_float4x3_precision.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_mcontext.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_destructor.h:
@@ -2172,6 +2173,10 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stack:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x2_precision.hpp:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocate_at_least.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_traits.h:
@@ -2180,11 +2185,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/pointer_traits.h:
 
-/usr/local/include/glm/ext/matrix_float2x2_precision.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/special_functions.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h:
 
@@ -2202,7 +2207,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/gamma.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_bool3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/pair.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/copysign.h:
 
@@ -2212,8 +2221,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/static_bounded_iter.h:
 
-/usr/local/include/glm/ext/scalar_constants.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/lexicographical_compare.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/uninitialized_algorithms.h:
@@ -2222,6 +2229,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_errno_t.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/reverse_iterator.h:
@@ -2229,6 +2238,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/search_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/reverse_access.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float2x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ranges_iterator_traits.h:
 
@@ -2240,8 +2251,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ostreambuf_iterator.h:
 
-/usr/local/include/glm/ext/vector_bool4.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/result_of.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/iter_swap.h:
@@ -2251,6 +2260,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/invocable.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_fd_clr.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_common.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/sched.h:
 
@@ -2274,15 +2285,15 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/distance.h:
 
-/usr/local/include/glm/ext/quaternion_float_precision.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/default_sentinel.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/matrix_transform.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/concepts.h:
 
-/usr/local/include/glm/mat2x4.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/bounded_iter.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_common.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__locale_dir/locale_base_api.h:
 
@@ -2310,6 +2321,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_union.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/string.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/sstream.h:
@@ -2324,13 +2337,9 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/istream.h:
 
-/usr/local/include/glm/detail/type_vec1.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/totally_ordered.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/fstream.h:
-
-/usr/local/include/glm/ext/vector_uint4.hpp:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_scancode.h:
 
@@ -2412,6 +2421,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_init.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double3_precision.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/directory_entry.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/clamp.h:
@@ -2434,9 +2445,9 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/ptrdiff_t.h:
 
-/usr/local/include/glm/ext/matrix_float2x4.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__debug_utils/strict_weak_ordering_check.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_projection.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/language.h:
 
@@ -2445,8 +2456,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_off_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/move.h:
-
-/usr/local/include/glm/ext/quaternion_common.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/remove.h:
 
@@ -2466,6 +2475,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/relation.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_transform.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/in_place.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/movable.h:
@@ -2484,6 +2495,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/constructible.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/common_reference_with.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_video.h:
@@ -2493,6 +2506,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/addressof.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/compare_three_way_result.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_constants.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_endian.h:
 
@@ -2516,11 +2531,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/countl.h:
 
-/usr/local/include/glm/detail/type_mat3x3.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__thread/support/pthread.h:
-
-/usr/local/include/glm/detail/type_float.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/resource.h:
 
@@ -2536,13 +2547,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/support.h:
 
-/usr/local/include/glm/vec3.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/lazy.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/kill_dependency.h:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_packing.inl:
 
-/usr/local/include/glm/detail/func_packing.inl:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/kill_dependency.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partial_sort_copy.h:
 
@@ -2578,13 +2587,15 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/not_fn.h:
 
-/usr/local/include/glm/ext/matrix_float4x4_precision.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/aliases.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat4x2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/align.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/deque.h:
 
@@ -2594,9 +2605,9 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/sift_down.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__assertion_handler:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/setup.hpp:
 
-/usr/local/include/glm/ext/quaternion_transform.inl:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__assertion_handler:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cmath:
 
@@ -2608,6 +2619,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/duration.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x3.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/limits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unwrap_iter.h:
@@ -2618,7 +2631,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/locale:
 
-/usr/local/include/glm/ext/scalar_constants.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double2_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/transform.h:
 
@@ -2629,8 +2642,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/min.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/exception:
-
-/usr/local/include/glm/ext/vector_bool3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/convertible_to.h:
 
@@ -2656,17 +2667,19 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_t.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat2x4.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/rotate.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pop_heap.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/set_symmetric_difference.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_double_precision.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/reverse_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/reverse.h:
-
-/usr/local/include/glm/mat4x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/lock_guard.h:
 
@@ -2686,6 +2699,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/binary_function.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/scalar_int_sized.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/count_if.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/file_clock.h:
@@ -2696,17 +2711,15 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/remove_copy_if.h:
 
-/usr/local/include/glm/ext/vector_float4_precision.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_arg_t.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/gtc/quaternion.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stddef_offsetof.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/remove_copy.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdbool.h:
-
-/usr/local/include/glm/gtc/epsilon.hpp:
 
 /Users/sergiumanoliu/GameEngine1/EngineAttempt/src/volk.h:
 
@@ -2722,11 +2735,9 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_copy_n.h:
 
-/usr/local/include/glm/ext/matrix_double4x2_precision.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/cgltf.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/private_constructor_tag.h:
-
-/usr/local/include/glm/detail/qualifier.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit/rotate.h:
 
@@ -2736,6 +2747,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_mutexattr_t.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat3x2.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory_resource/memory_resource.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h:
@@ -2744,15 +2757,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/any_of.h:
 
-/usr/local/include/glm/ext/vector_uint3.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/unique_lock.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition.h:
-
-/usr/local/include/glm/packing.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_trivial.h:
 
@@ -2761,10 +2770,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_arithmetic.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/unary_negate.h:
-
-/usr/local/include/glm/gtc/matrix_transform.inl:
-
-/usr/local/include/glm/detail/func_trigonometric.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_segment_if.h:
 
@@ -2777,10 +2782,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/byte.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/string.h:
-
-/usr/local/include/glm/ext/quaternion_double_precision.hpp:
-
-/usr/local/include/glm/detail/func_exponential.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config:
 
@@ -2799,6 +2800,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ios/fpos.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_strings.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_relational.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/pointer_to_binary_function.h:
 
@@ -2822,7 +2825,7 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/add_rvalue_reference.h:
 
-/usr/local/include/glm/ext/matrix_double3x4_precision.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_double4.hpp:
 
 /usr/local/include/vulkan/vulkan_core.h:
 
@@ -2833,6 +2836,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocation_guard.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/max.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/compute_vector_relational.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/view_interface.h:
 
@@ -2856,15 +2861,17 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/iterator_operations.h:
 
-/usr/local/include/glm/ext/vector_uint3_sized.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctype_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_move_common.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_quat.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_ctype.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_exponential.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_printf.h:
 
@@ -2892,6 +2899,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/synth_three_way.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_mat2x4.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_segment.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/equal.h:
@@ -2911,8 +2920,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/trigonometric_functions.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/copy_backward.h:
-
-/usr/local/include/glm/ext/matrix_float3x4.hpp:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_keycode.h:
 
@@ -2940,8 +2947,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/access.h:
 
-/usr/local/include/glm/detail/type_mat4x2.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_symbol_aliasing.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/all_of.h:
@@ -2960,8 +2965,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/readable_traits.h:
 
-/usr/local/include/glm/ext/vector_int4.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/operations.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cstddef:
@@ -2970,13 +2973,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_xlocale.h:
 
-/usr/local/include/glm/gtc/matrix_transform.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/destruct_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/placement_new_delete.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_string.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double2x3_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator.h:
 
@@ -3004,19 +3007,19 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_locale_posix2008.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/binary_search.h:
 
-/usr/local/include/glm/ext/quaternion_relational.hpp:
-
-/usr/local/include/glm/ext/matrix_float3x2.hpp:
-
-/usr/local/include/glm/ext/matrix_double3x3.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double3x3_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/new:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_main.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/ufbx.c:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_trivially_lexicographically_comparable.h:
 
@@ -3033,8 +3036,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/limits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/class_or_enum.h:
-
-/usr/local/include/glm/ext/matrix_double4x4.hpp:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stddef_rsize_t.h:
 
@@ -3076,6 +3077,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__chrono/steady_clock.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/integer.hpp:
+
 /usr/local/include/vulkan/vk_platform.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/types.h:
@@ -3094,6 +3097,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /usr/local/include/vk_video/vulkan_video_codec_vp9std.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/common.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/stable_sort.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/appleapiopts.h:
@@ -3104,9 +3109,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_end.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_int4_sized.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/___wctype.h:
 
 /usr/local/include/vk_video/vulkan_video_codec_h265std_decode.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_uint2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_attr_t.h:
 
@@ -3115,8 +3124,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_all_extents.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/unique.h:
-
-/usr/local/include/glm/mat2x3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_volatile.h:
 
@@ -3130,13 +3137,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_ctermid.h:
 
-/usr/local/include/glm/ext/matrix_double2x3.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition_copy.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_wchar_t.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdarg.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x4_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_if_not.h:
 
@@ -3152,15 +3159,15 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__string/extern_template_lists.h:
 
-/usr/local/include/glm/detail/type_vec4.inl:
-
-/usr/local/include/glm/detail/type_mat3x4.hpp:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_abort.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/glm.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint8_t.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float4x3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/memory:
 
@@ -3170,13 +3177,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__cstddef/size_t.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_rune_t.h:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_half.hpp:
 
-/usr/local/include/glm/detail/type_mat2x4.hpp:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_rune_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_cv.h:
 
-/usr/local/include/glm/exponential.hpp:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdbool.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/error_functions.h:
 
@@ -3192,6 +3199,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_size_t.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_vec1.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_constant_evaluated.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/istreambuf_iterator.h:
@@ -3205,6 +3214,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_abstract.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/ostream_iterator.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/mat3x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/abi.h:
 
@@ -3236,9 +3247,11 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/global_typed_new_delete.h:
 
-/usr/local/include/glm/ext/matrix_double3x3_precision.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/quaternion_trigonometric.inl:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/move_iterator.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/simd/platform.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_callable.h:
 
@@ -3254,6 +3267,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_dlopennote.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_float3x2.hpp:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/remove_cvref.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_wctrans_t.h:
@@ -3261,8 +3276,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_mode_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/set_difference.h:
-
-/usr/local/include/glm/ext/vector_relational.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/compressed_pair.h:
 
@@ -3302,8 +3315,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/to_gcc_order.h:
 
-/usr/local/include/glm/detail/type_mat3x3.inl:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_intptr_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__compare/common_comparison_category.h:
@@ -3312,9 +3323,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cwchar:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/func_matrix.inl:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/mach/machine/_structs.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_sensor.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/vector_float3.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/streambuf.h:
 
@@ -3340,15 +3355,13 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_types.h:
 
-/usr/local/include/glm/ext/vector_double3.hpp:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/type_float.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_mcontext.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/equality_comparable.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/bitset:
-
-/usr/local/include/glm/ext/matrix_double4x2.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_pthread/_pthread_types.h:
 
@@ -3359,8 +3372,6 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/adjacent_find.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint64_t.h:
-
-/usr/local/include/glm/ext/matrix_clip_space.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/construct_at.h:
 
@@ -3386,6 +3397,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__vector/vector_bool.h:
 
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/ext/matrix_double4x2.hpp:
+
 /usr/local/include/vk_video/vulkan_video_codec_h264std_decode.h:
 
 /Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers/SDL_blendmode.h:
@@ -3397,6 +3410,8 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_u_int64_t.h:
+
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/detail/qualifier.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_dev_t.h:
 
@@ -3412,16 +3427,14 @@ CMakeFiles/myengine.dir/tests.cpp.o: /Users/sergiumanoliu/GameEngine1/EngineAtte
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/swappable.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_types.h:
+/Users/sergiumanoliu/GameEngine1/EngineAttempt/src/glm/exponential.hpp:
 
-/usr/local/include/glm/mat3x4.hpp:
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/_types.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/semiregular.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/_limits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_unsigned.h:
-
-/usr/local/include/glm/detail/compute_vector_relational.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__functional/weak_result_type.h:

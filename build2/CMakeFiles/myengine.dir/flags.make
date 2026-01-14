@@ -5,7 +5,7 @@
 # compile CXX with /usr/bin/c++
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/src -I/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers -isystem /opt/homebrew/include -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.
+C_INCLUDES = -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/src -I/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-src -isystem /opt/homebrew/include -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.
 
 C_FLAGSarm64 =  -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
 
@@ -13,7 +13,7 @@ C_FLAGS =  -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/src -I/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers -isystem /opt/homebrew/include -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.
+CXX_INCLUDES = -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/src -I/Users/sergiumanoliu/SDL/SDL/sdl_install/SDL3.framework/Headers -I/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-src -isystem /opt/homebrew/include -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.
 
 CXX_FLAGSarm64 = -std=gnu++17 -arch arm64 -iframework /Users/sergiumanoliu/SDL/SDL/sdl_install/.  -F /Users/sergiumanoliu/SDL/SDL/sdl_install
 

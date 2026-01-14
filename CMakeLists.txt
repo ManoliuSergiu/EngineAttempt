@@ -4,38 +4,60 @@ project(myengine)
 set(CMAKE_CXX_STANDARD 17)
 
 # --- 1. DEFINE ASSETS ---
-# List all files you need at runtime (Shaders, Textures, etc.)
+# Add your model files here so they get copied too!
 set(ASSET_FILES 
     "${CMAKE_CURRENT_SOURCE_DIR}/vert.spv" 
     "${CMAKE_CURRENT_SOURCE_DIR}/frag.spv"
+    "${CMAKE_CURRENT_SOURCE_DIR}/Audi R8.glb"  # <--- Make sure you have this file!
 )
 
-# --- 2. DEPENDENCIES ---
+# --- 2. DEPENDENCIES SETUP ---
 if(APPLE)
     list(APPEND CMAKE_PREFIX_PATH "~/SDL/SDL/sdl_install")
 elseif (WIN32)
-    set(SDL3_DIR "C:/SDL/cmake")
+    # Point to the folder containing SDL3Config.cmake
+    set(SDL3_DIR "C:/SDL/cmake") 
 endif ()
 
-
-
-
 find_package(Vulkan REQUIRED)
-find_package(SDL3 REQUIRED CONFIG COMPONENTS SDL3)
+find_package(SDL3 REQUIRED CONFIG COMPONENTS SDL3-shared)
 
-# --- 3. BUILD TARGET ---
+# --- 3. FETCH LIBRARIES (GLM & CGLTF) ---
+include(FetchContent)
+
+# A. GLM
+FetchContent_Declare(
+    glm
+    GIT_REPOSITORY https://github.com/g-truc/glm.git
+    GIT_TAG        1.0.1
+)
+FetchContent_MakeAvailable(glm)
+
+# B. CGLTF (Model Loader)
+FetchContent_Declare(
+    cgltf
+    GIT_REPOSITORY https://github.com/jkuhlmann/cgltf.git
+    GIT_TAG        v1.13
+)
+FetchContent_MakeAvailable(cgltf)
+
+# --- 4. BUILD TARGET ---
 add_executable(myengine src/volk.c tests.cpp)
 
 target_include_directories(myengine PRIVATE ${Vulkan_INCLUDE_DIRS} "src")
-target_link_libraries(myengine PRIVATE SDL3::SDL3-shared Vulkan::Headers)
 
-# --- 4. ASSET HANDLING (The Magic Part) ---
+# Link everything together
+target_link_libraries(myengine PRIVATE 
+    SDL3::SDL3-shared 
+    Vulkan::Headers
+    glm::glm
+)
 
-# A. Attach files to target (Makes them show up in IDE)
+# --- 5. ASSET HANDLING ---
 target_sources(myengine PRIVATE ${ASSET_FILES})
 
 if(APPLE)
-    # macOS: Mark them as Resources to go into the Bundle
+    # macOS: Copy into Bundle Resources
     set_source_files_properties(${ASSET_FILES} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
     
     set_target_properties(myengine PROPERTIES
@@ -44,7 +66,7 @@ if(APPLE)
         RESOURCE "${ASSET_FILES}"
     )
 else()
-    # Windows/Linux: Copy files to the build folder next to the .exe
+    # Windows/Linux: Copy next to executable
     foreach(ASSET ${ASSET_FILES})
         add_custom_command(
             TARGET myengine POST_BUILD
@@ -55,18 +77,9 @@ else()
         )
     endforeach()
 endif()
-include(FetchContent)
 
-FetchContent_Declare(
-    glm
-    GIT_REPOSITORY https://github.com/g-truc/glm.git
-    GIT_TAG        1.0.3  # Replace with the version you want
-)
-FetchContent_MakeAvailable(glm)
-target_link_libraries(myengine PRIVATE glm::glm)
-# --- 5. WINDOWS DLL COPYING ---
+# --- 6. WINDOWS DLL COPYING ---
 if(WIN32)
-    # Auto-copy SDL3.dll to the exe folder so you don't get "DLL Missing" errors
     add_custom_command(
         TARGET myengine POST_BUILD
         COMMAND "${CMAKE_COMMAND}" -E copy_if_different 

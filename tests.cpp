@@ -19,6 +19,9 @@
 #include <set>
 #include <optional>
 #include <array>
+#include <ufbx.c>
+#include <fstream>
+#include <cgltf.h>
 
 static SDL_Window *window = nullptr;
 
@@ -47,7 +50,7 @@ VkSemaphore imageAvailableSemaphore;
 VkSemaphore renderFinishedSemaphore;
 VkFence inFlightFence;
 struct Vertex {
-    glm::vec2 pos;
+    glm::vec3 pos;
     glm::vec3 color;
 
     // 1. How big is one vertex? (Stride)
@@ -78,14 +81,85 @@ struct Vertex {
         return attributeDescriptions;
     }
 };
-const std::vector<Vertex> vertices = {
-    {{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}}, // Top Red
-    {{0.5f, 0.5f},  {0.0f, 1.0f, 0.0f}}, // Right Green
-    {{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}}  // Left Blue
+std::vector<Vertex> vertices = {
+    {{0.0f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}}, // Top Red
+    {{0.5f, 0.5f, 0.0f},  {0.0f, 1.0f, 0.0f}}, // Right Green
+    {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}}  // Left Blue
 };
 
-#include <fstream>
-#include <glm/glm.hpp>
+// 1. Include the library implementation
+#define CGLTF_IMPLEMENTATION
+#include "cgltf.h"
+
+// 2. The Loader Function
+std::vector<Vertex> loadGLTF(const std::string& filename) {
+    std::vector<Vertex> outputVertices;
+
+    cgltf_options options = {};
+    cgltf_data* data = nullptr;
+    cgltf_result result = cgltf_parse_file(&options, filename.c_str(), &data);
+
+    if (result != cgltf_result_success) {
+        SDL_Log("Failed to parse GLTF: %s", filename.c_str());
+        return {};
+    }
+
+    // Load the binary buffers (.bin files)
+    result = cgltf_load_buffers(&options, data, filename.c_str());
+    if (result != cgltf_result_success) {
+        cgltf_free(data);
+        SDL_Log("Failed to load GLTF buffers");
+        return {};
+    }
+
+    // Iterate over all meshes (we just grab the first one for simplicity)
+    for (size_t m = 0; m < data->meshes_count; ++m) {
+        cgltf_mesh* mesh = &data->meshes[m];
+
+        // Iterate over primitives (sub-meshes)
+        for (size_t p = 0; p < mesh->primitives_count; ++p) {
+            cgltf_primitive* primitive = &mesh->primitives[p];
+
+            // Pointers to the data we want
+            cgltf_accessor* posAccessor = nullptr;
+            cgltf_accessor* colorAccessor = nullptr;
+
+            // Find the attributes (POSITION, COLOR, etc.)
+            for (size_t a = 0; a < primitive->attributes_count; ++a) {
+                if (primitive->attributes[a].type == cgltf_attribute_type_position) {
+                    posAccessor = primitive->attributes[a].data;
+                }
+                if (primitive->attributes[a].type == cgltf_attribute_type_color) {
+                    colorAccessor = primitive->attributes[a].data;
+                }
+            }
+
+            // We NEED positions. If none, skip.
+            if (!posAccessor) continue;
+
+            // Read the data
+            for (size_t i = 0; i < posAccessor->count; ++i) {
+                Vertex v{};
+
+                // 1. Read Position (vec3)
+                cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
+
+                // 2. Read Color (vec3) - Optional, default to White if missing
+                if (colorAccessor) {
+                    cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
+                } else {
+                    v.color = {1.0f, 1.0f, 1.0f}; // White default
+                }
+
+                outputVertices.push_back(v);
+            }
+        }
+    }
+
+    cgltf_free(data);
+    SDL_Log("Loaded GLTF: %s (%zu vertices)", filename.c_str(), outputVertices.size());
+    return outputVertices;
+}
 
 
 void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
@@ -273,7 +347,7 @@ void createGraphicsPipeline() {
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL; // Fill the triangle (use LINE for wireframe)
     rasterizer.lineWidth = 1.0f;
     rasterizer.cullMode = VK_CULL_MODE_BACK_BIT; // Don't draw back of triangle
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
     rasterizer.depthBiasEnable = VK_FALSE;
 
     // 6. Multisampling (Anti-aliasing - Off for now)
@@ -851,8 +925,19 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         return SDL_APP_FAILURE; 
     }
     createGraphicsPipeline();
+    std::string modelPath = std::string(SDL_GetBasePath()) + "Audi R8.glb"; 
+    vertices = loadGLTF(modelPath);
 
-    // 2. Create and fill the Vertex Buffer (Fixes NULL buffer crash)
+    // Fallback if file missing:
+    if (vertices.empty()) {
+        SDL_Log("Model not found, loading fallback triangle.");
+        vertices = {
+            {{0.0f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}},
+            {{0.5f, 0.5f, 0.0f},  {0.0f, 1.0f, 0.0f}},
+            {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}}
+        };
+    }
+
     VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
     createBuffer(bufferSize,
@@ -889,6 +974,9 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 		
 		
 	}
+    
+
+
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
 

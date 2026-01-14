@@ -129,6 +129,19 @@ myengine/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/myengine.dir/build.make CMakeFiles/myengine.dir/build
 .PHONY : myengine/fast
 
+#=============================================================================
+# Target rules for targets named glm
+
+# Build rule for target.
+glm: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 glm
+.PHONY : glm
+
+# fast build rule for target.
+glm/fast:
+	$(MAKE) $(MAKESILENT) -f _deps/glm-build/glm/CMakeFiles/glm.dir/build.make _deps/glm-build/glm/CMakeFiles/glm.dir/build
+.PHONY : glm/fast
+
 src/volk.o: src/volk.c.o
 .PHONY : src/volk.o
 
@@ -185,6 +198,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... glm"
 	@echo "... myengine"
 	@echo "... src/volk.o"
 	@echo "... src/volk.i"
