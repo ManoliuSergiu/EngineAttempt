@@ -143,7 +143,7 @@ std::vector<Vertex> loadGLTF(const std::string& filename) {
 
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
-                v.pos*=0.01;
+                v.pos*=0.1;
                 // 2. Read Color (vec3) - Optional, default to White if missing
                 if (colorAccessor) {
                     cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
@@ -375,7 +375,10 @@ void createGraphicsPipeline() {
     if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
         throw std::runtime_error("failed to create pipeline layout!");
     }
-
+    VkPushConstantRange pushConstantRange{};
+    pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+    pushConstantRange.offset = 0;
+    pushConstantRange.size = sizeof(glm::mat4); // 64 
     // 9. THE GRAND FINALE: Create the Pipeline
     VkGraphicsPipelineCreateInfo pipelineInfo{};
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -393,12 +396,13 @@ void createGraphicsPipeline() {
    // Add this struct definition
     VkPipelineDepthStencilStateCreateInfo depthStencil{};
     depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-    depthStencil.depthTestEnable = VK_TRUE;  // Check Z
-    depthStencil.depthWriteEnable = VK_TRUE; // Write Z
+    depthStencil.depthTestEnable = VK_FALSE;  // Check Z
+    depthStencil.depthWriteEnable = VK_FALSE; // Write Z
     depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // "Closer" replaces "Farther"
     depthStencil.depthBoundsTestEnable = VK_FALSE;
     depthStencil.stencilTestEnable = VK_FALSE;
-
+    pipelineLayoutInfo.pushConstantRangeCount = 1; // <--- ADDED
+    pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
     // ...
     pipelineInfo.pDepthStencilState = &depthStencil; // <--- ADD THIS LINE
     // ... 
@@ -473,7 +477,7 @@ QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surfa
 }
 
 struct TransformComponent {
-    glm::vec3 position; // 12 bytes
+    glm::vec3 position; // 12 
     glm::quat rotation; // 16 bytes
     glm::vec3 scale;    // 12 bytes
 };
@@ -1034,8 +1038,23 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         VkBuffer vertexBuffers[] = {vertexBuffer}; // Make sure 'vertexBuffer' is your global buffer handle
         VkDeviceSize offsets[] = {0};
         vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
+        // 1. Projection: standard 45 FOV
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 1000.0f);
+        projection[1][1] *= -1; // Flip Y for Vulkan
 
-        vkCmdDraw(commandBuffer, 3, 1, 0, 0);
+        // 2. View: Move camera BACK (positive Z) and UP slightly
+        // Looking at (0,0,0) from (0, 1, 5)
+        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+
+        // 3. Model: Identity (No rotation yet)
+        glm::mat4 model = glm::mat4(1.0f);
+        
+        // Scale it down just in case the model is HUGE
+        model = glm::scale(model, glm::vec3(0.01f)); 
+
+        glm::mat4 meshMatrix = projection * view * model;
+        vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
+        vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);
     vkEndCommandBuffer(commandBuffer);
