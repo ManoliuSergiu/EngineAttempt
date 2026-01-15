@@ -1,6 +1,10 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+/build/
+/build2/
+/src/
+/cmake-build-debug/
 # Ignored default folder with query files
 /queries/
 # Datasource local storage ignored files
@@ -8,7 +12,3 @@
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-/build/
-/build2/
-/src/
-/cmake-build-debug/
