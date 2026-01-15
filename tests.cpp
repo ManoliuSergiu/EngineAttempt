@@ -1139,7 +1139,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         // Scale it down just in case the model is HUGE
         model = glm::scale(model, glm::vec3(1.0f)); 
 
-        glm::mat4 meshMatrix = glm::mat4(1.0f);  
+        glm::mat4 meshMatrix = projection*view*model;  
         vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
         vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
