@@ -148,7 +148,7 @@ std::vector<Vertex> loadGLTF(const std::string& filename) {
 
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
-                //v.pos*=0.1;
+                v.pos*=0.01f;
                 // 2. Read Color (vec3) - Optional, default to White if missing
                 if (colorAccessor) {
                     cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
@@ -352,7 +352,7 @@ void createGraphicsPipeline() {
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL; // Fill the triangle (use LINE for wireframe)
     rasterizer.lineWidth = 1.0f;
     rasterizer.cullMode = VK_CULL_MODE_NONE; // Don't draw back of triangle
-    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
+    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
     rasterizer.depthBiasEnable = VK_FALSE;
 
     // 6. Multisampling (Anti-aliasing - Off for now)
