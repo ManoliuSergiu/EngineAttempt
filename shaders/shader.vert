@@ -1,14 +1,22 @@
-#version 450
+#version 460 core
+
+// 1. Inputs from C++ (must match your Vertex struct)
 layout(location = 0) in vec3 inPosition;
 layout(location = 1) in vec3 inColor;
+
+// 2. Output to Fragment Shader
 layout(location = 0) out vec3 fragColor;
 
-// Remove push constants for a second
+// 3. Push Constants (The "Global" 4x4 Matrix you send every frame)
+layout(push_constant) uniform PushConstants {
+    mat4 render_matrix; 
+} constants;
+
 void main() {
-    // FORCE the triangle to the center of the screen
-    // This ignores your camera, rotation, and model data.
-    // If you see NOTHING now, your Vertex Buffer is empty or broken.
-    gl_Position = vec4(inPosition.x * 0.01, inPosition.y * 0.01, 0.5, 1.0);
-    
-    fragColor = vec3(1.0, 1.0, 1.0); // Force White
+    // Pass color through to the next stage
+    fragColor = inColor;
+
+    // Calculate final position: Matrix * Position
+    // The "1.0" is required to turn a 3D point (x,y,z) into a 4D homogeneous vector (x,y,z,w)
+    gl_Position = constants.render_matrix * vec4(inPosition, 1.0);
 }

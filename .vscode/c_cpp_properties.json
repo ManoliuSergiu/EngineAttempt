@@ -26,7 +26,8 @@
                 "~/SDL/SDL/include",
                 "${workspaceFolder}/src",
                 "~/SDL3/",
-                "/usr/local/include"
+                "/usr/local/include",
+                "${workspaceFolder}/src"
             ],
             "defines": [
                 "_DEBUG",
@@ -39,7 +40,6 @@
             "cppStandard": "c++17",
             "intelliSenseMode": "macos-clang-arm64"
         }
-       
     ],
     "version": 4
 }

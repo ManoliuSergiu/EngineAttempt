@@ -49,6 +49,11 @@ VkDeviceMemory vertexBufferMemory;
 VkSemaphore imageAvailableSemaphore;
 VkSemaphore renderFinishedSemaphore;
 VkFence inFlightFence;
+VkImage depthImage;
+VkDeviceMemory depthImageMemory;
+VkImageView depthImageView;
+
+
 struct Vertex {
     glm::vec3 pos;
     glm::vec3 color;
@@ -90,7 +95,7 @@ std::vector<Vertex> vertices = {
 // 1. Include the library implementation
 #define CGLTF_IMPLEMENTATION
 #include "cgltf.h"
-
+// Helper to find a supported format (Depth 32-bit or 24-bit)
 // 2. The Loader Function
 std::vector<Vertex> loadGLTF(const std::string& filename) {
     std::vector<Vertex> outputVertices;
@@ -346,8 +351,8 @@ void createGraphicsPipeline() {
     rasterizer.rasterizerDiscardEnable = VK_FALSE;
     rasterizer.polygonMode = VK_POLYGON_MODE_FILL; // Fill the triangle (use LINE for wireframe)
     rasterizer.lineWidth = 1.0f;
-    rasterizer.cullMode = VK_CULL_MODE_BACK_BIT; // Don't draw back of triangle
-    rasterizer.frontFace = VK_FRONT_FACE_COUNTER_CLOCKWISE;
+    rasterizer.cullMode = VK_CULL_MODE_NONE; // Don't draw back of triangle
+    rasterizer.frontFace = VK_FRONT_FACE_CLOCKWISE;
     rasterizer.depthBiasEnable = VK_FALSE;
 
     // 6. Multisampling (Anti-aliasing - Off for now)
@@ -396,8 +401,8 @@ void createGraphicsPipeline() {
    // Add this struct definition
     VkPipelineDepthStencilStateCreateInfo depthStencil{};
     depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-    depthStencil.depthTestEnable = VK_FALSE;  // Check Z
-    depthStencil.depthWriteEnable = VK_FALSE; // Write Z
+    depthStencil.depthTestEnable = VK_TRUE;  // Check Z
+    depthStencil.depthWriteEnable = VK_TRUE; // Write Z
     depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // "Closer" replaces "Farther"
     depthStencil.depthBoundsTestEnable = VK_FALSE;
     depthStencil.stencilTestEnable = VK_FALSE;
@@ -418,6 +423,71 @@ void createGraphicsPipeline() {
 }
 
 
+VkFormat findDepthFormat() {
+    std::vector<VkFormat> candidates = {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT};
+    for (VkFormat format : candidates) {
+        VkFormatProperties props;
+        vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
+        if ((props.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) == VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+            return format;
+        }
+    }
+    throw std::runtime_error("failed to find supported depth format!");
+}
+
+void createDepthResources() {
+    VkFormat depthFormat = findDepthFormat();
+    
+    // 1. Create the Image Object
+    VkImageCreateInfo imageInfo{};
+    imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
+    imageInfo.imageType = VK_IMAGE_TYPE_2D;
+    imageInfo.extent.width = swapChainExtent.width;
+    imageInfo.extent.height = swapChainExtent.height;
+    imageInfo.extent.depth = 1;
+    imageInfo.mipLevels = 1;
+    imageInfo.arrayLayers = 1;
+    imageInfo.format = depthFormat;
+    imageInfo.tiling = VK_IMAGE_TILING_OPTIMAL;
+    imageInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    imageInfo.usage = VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+    imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
+    imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
+
+    if (vkCreateImage(device, &imageInfo, nullptr, &depthImage) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create depth image!");
+    }
+
+    // 2. Allocate Memory for it
+    VkMemoryRequirements memRequirements;
+    vkGetImageMemoryRequirements(device, depthImage, &memRequirements);
+
+    VkMemoryAllocateInfo allocInfo{};
+    allocInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+    allocInfo.allocationSize = memRequirements.size;
+    allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
+
+    if (vkAllocateMemory(device, &allocInfo, nullptr, &depthImageMemory) != VK_SUCCESS) {
+        throw std::runtime_error("failed to allocate depth image memory!");
+    }
+    vkBindImageMemory(device, depthImage, depthImageMemory, 0);
+
+    // 3. Create the Image View (so the pipeline can see it)
+    VkImageViewCreateInfo viewInfo{};
+    viewInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    viewInfo.image = depthImage;
+    viewInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    viewInfo.format = depthFormat;
+    viewInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_DEPTH_BIT;
+    viewInfo.subresourceRange.baseMipLevel = 0;
+    viewInfo.subresourceRange.levelCount = 1;
+    viewInfo.subresourceRange.baseArrayLayer = 0;
+    viewInfo.subresourceRange.layerCount = 1;
+
+    if (vkCreateImageView(device, &viewInfo, nullptr, &depthImageView) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create depth image view!");
+    }
+}
 
 
 struct QueueFamilyIndices {
@@ -809,51 +879,61 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     // STEP 6: CREATE RENDER PASS
     // ---------------------------------------------------------
     
-    // 1. Description of the Color Attachment (The Swapchain Image)
+
+
+
+    // 3. Subpass Dependency (Synchronization)
+    // We need to wait for the swapchain to give us an image before we can draw on it.
+   // ---------------------------------------------------------
+    // STEP 6: CREATE RENDER PASS (Updated for Depth)
+    // ---------------------------------------------------------
     VkAttachmentDescription colorAttachment{};
-    colorAttachment.format = swapChainImageFormat; // Must match the swapchain!
-    colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT; // 1 sample = no MSAA (standard)
-    
-    // What to do with data before rendering:
-    colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR; // Clear screen to black at start
-    // What to do with data after rendering:
-    colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE; // Save the picture so we can see it
-    
-    // We don't use Stencil (for now), so we don't care:
+    colorAttachment.format = swapChainImageFormat;
+    colorAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
+    colorAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR;
+    colorAttachment.storeOp = VK_ATTACHMENT_STORE_OP_STORE;
     colorAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
     colorAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    colorAttachment.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
 
-    // LAYOUT TRANSITIONS (The Magic)
-    // Images in Vulkan have "layouts". The GPU optimizes memory based on what you are doing.
-    colorAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED; // We don't care what format it was in before
-    colorAttachment.finalLayout = VK_IMAGE_LAYOUT_PRESENT_SRC_KHR; // Convert to "Presentable" format at the end
-
-    // 2. Subpass Reference
-    // A render pass can have multiple steps (subpasses). We just have 1.
     VkAttachmentReference colorAttachmentRef{};
-    colorAttachmentRef.attachment = 0; // Index of the attachment in the array below
-    colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL; // Optimize for writing color
+    colorAttachmentRef.attachment = 0;
+    colorAttachmentRef.layout = VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
+
+    // --- NEW: Depth Attachment ---
+    VkAttachmentDescription depthAttachment{};
+    depthAttachment.format = findDepthFormat();
+    depthAttachment.samples = VK_SAMPLE_COUNT_1_BIT;
+    depthAttachment.loadOp = VK_ATTACHMENT_LOAD_OP_CLEAR; // Clear depth every frame!
+    depthAttachment.storeOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthAttachment.stencilLoadOp = VK_ATTACHMENT_LOAD_OP_DONT_CARE;
+    depthAttachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
+    depthAttachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
+    depthAttachment.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+    VkAttachmentReference depthAttachmentRef{};
+    depthAttachmentRef.attachment = 1;
+    depthAttachmentRef.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+    // -----------------------------
 
     VkSubpassDescription subpass{};
     subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
     subpass.colorAttachmentCount = 1;
     subpass.pColorAttachments = &colorAttachmentRef;
+    subpass.pDepthStencilAttachment = &depthAttachmentRef; // Link depth here
 
-    // 3. Subpass Dependency (Synchronization)
-    // We need to wait for the swapchain to give us an image before we can draw on it.
+    // We now have an array of 2 attachments
+    std::array<VkAttachmentDescription, 2> attachments = {colorAttachment, depthAttachment};
+
     VkSubpassDependency dependency{};
-    dependency.srcSubpass = VK_SUBPASS_EXTERNAL; // "Anything outside this pass"
-    dependency.dstSubpass = 0; // "This pass"
-    
-    // Wait for the "Color Attachment Output" stage...
-    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
+    dependency.srcSubpass = VK_SUBPASS_EXTERNAL;
+    dependency.dstSubpass = 0;
+    dependency.srcStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
     dependency.srcAccessMask = 0;
-    
-    // ...before we try to Write Color.
-    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
-    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
+    dependency.dstStageMask = VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT | VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT;
+    dependency.dstAccessMask = VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT | VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_WRITE_BIT;
 
-    // 4. Create the Render Pass
     VkRenderPassCreateInfo renderPassInfo{};
     renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
     renderPassInfo.attachmentCount = 1;
@@ -872,19 +952,20 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     // ---------------------------------------------------------
     // STEP 7: CREATE FRAMEBUFFERS
     // ---------------------------------------------------------
-    
+    createGraphicsPipeline();
     swapChainFramebuffers.resize(swapChainImageViews.size());
 
     for (size_t i = 0; i < swapChainImageViews.size(); i++) {
-        VkImageView attachments[] = {
-            swapChainImageViews[i]
+        std::array<VkImageView, 2> attachments = {
+            swapChainImageViews[i],
+            depthImageView 
         };
 
         VkFramebufferCreateInfo framebufferInfo{};
         framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
-        framebufferInfo.renderPass = renderPass; // Link to the render pass we just created
-        framebufferInfo.attachmentCount = 1;
-        framebufferInfo.pAttachments = attachments;
+        framebufferInfo.renderPass = renderPass;
+        framebufferInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
+        framebufferInfo.pAttachments = attachments.data();
         framebufferInfo.width = swapChainExtent.width;
         framebufferInfo.height = swapChainExtent.height;
         framebufferInfo.layers = 1;
@@ -939,7 +1020,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Failed to create sync objects!"); 
         return SDL_APP_FAILURE; 
     }
-    createGraphicsPipeline();
+    createDepthResources();
+    
     std::string modelPath = std::string(SDL_GetBasePath()) + "Audi R8.glb"; 
     vertices = loadGLTF(modelPath);
 
@@ -953,6 +1035,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         };
     }
 
+    
     VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
     createBuffer(bufferSize,
@@ -990,13 +1073,13 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 		
 	}
     
-
+    
 
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
 
 
-
+static float angle = 0.0f;
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
     // 1. WAIT for the previous frame to finish
@@ -1029,9 +1112,12 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     renderPassInfo.renderArea.offset = {0, 0};
     renderPassInfo.renderArea.extent = swapChainExtent;
 
-    VkClearValue clearColor = {{{1.0f, 0.0f, 0.0f, 1.0f}}}; // Black Background
-    renderPassInfo.clearValueCount = 1;
-    renderPassInfo.pClearValues = &clearColor;
+    std::array<VkClearValue, 2> clearValues{};
+    clearValues[0].color = {{0.0f, 0.0f, 0.0f, 1.0f}}; // Black Background
+    clearValues[1].depthStencil = {1.0f, 0};           // Clear Depth to 1.0 (Far)
+
+    renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
+    renderPassInfo.pClearValues = clearValues.data();
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
         vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
@@ -1047,12 +1133,13 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 
         // 3. Model: Identity (No rotation yet)
-        glm::mat4 model = glm::mat4(1.0f);
         
+        angle += 0.01f; // Spin speed
+        glm::mat4 model = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f));
         // Scale it down just in case the model is HUGE
         model = glm::scale(model, glm::vec3(1.0f)); 
 
-        glm::mat4 meshMatrix = projection * view * model;
+        glm::mat4 meshMatrix = glm::mat4(1.0f);  
         vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
         vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
