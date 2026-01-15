@@ -2,6 +2,7 @@
 #define VK_NO_PROTOTYPES
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#define CGLTF_IMPLEMENTATION
 
 
 
@@ -21,7 +22,7 @@
 #include <array>
 #include <ufbx.c>
 #include <fstream>
-#include <cgltf.h>
+#include "cgltf.h"
 
 static SDL_Window *window = nullptr;
 
@@ -74,7 +75,7 @@ struct Vertex {
         // Position
         attributeDescriptions[0].binding = 0;
         attributeDescriptions[0].location = 0; // Matches shader "layout(location = 0)"
-        attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT; // vec2
+        attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
         attributeDescriptions[0].offset = offsetof(Vertex, pos);
 
         // Color
@@ -93,10 +94,62 @@ std::vector<Vertex> vertices = {
 };
 
 // 1. Include the library implementation
-#define CGLTF_IMPLEMENTATION
-#include "cgltf.h"
-// Helper to find a supported format (Depth 32-bit or 24-bit)
-// 2. The Loader Function
+void recLoad(const cgltf_node* node, const glm::mat4 &matrix,std::vector<Vertex> &outputVertices)
+{
+    for (size_t i = 0; i < node->children_count; i++)
+    {
+        auto test = glm::tmat4x4<cgltf_float>(*node->matrix);
+
+        const auto mesh = node->mesh;
+        for (size_t p = 0; p < mesh->primitives_count; ++p) {
+            cgltf_primitive* primitive = &mesh->primitives[p];
+
+            // Pointers to the data we want
+            cgltf_accessor* posAccessor = nullptr;
+            cgltf_accessor* colorAccessor = nullptr;
+
+            // Find the attributes (POSITION, COLOR, etc.)
+            for (size_t a = 0; a < primitive->attributes_count; ++a) {
+                if (primitive->attributes[a].type == cgltf_attribute_type_position) {
+                    posAccessor = primitive->attributes[a].data;
+                }
+                if (primitive->attributes[a].type == cgltf_attribute_type_color) {
+                    colorAccessor = primitive->attributes[a].data;
+                }
+            }
+
+            // We NEED positions. If none, skip.
+            if (!posAccessor) continue;
+            size_t vertexCount = primitive->indices ? primitive->indices->count : posAccessor->count;
+            // Read the data
+            for (size_t k = 0; k < vertexCount; ++k) {
+                Vertex v{};
+                size_t index = k;
+                if (primitive->indices) {
+                    index = cgltf_accessor_read_index(primitive->indices, k);
+                }
+                // 1. Read Position (vec3)
+                cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
+                v.pos=glm::vec4(v.pos,1.0f)*matrix;
+                v.pos *= 0.11f; // Scale down
+
+                if (colorAccessor) {
+                    cgltf_accessor_read_float(colorAccessor, index, &v.color.r, 3);
+                } else {
+                    v.color = {0.5f, 0.5f, 0.5f};
+                }
+
+                outputVertices.push_back(v);
+            }
+        }
+
+
+
+        recLoad(node->children[i],matrix*test,outputVertices);
+    }
+
+    
+}
 std::vector<Vertex> loadGLTF(const std::string& filename) {
     std::vector<Vertex> outputVertices;
 
@@ -117,49 +170,8 @@ std::vector<Vertex> loadGLTF(const std::string& filename) {
         return {};
     }
 
-    // Iterate over all meshes (we just grab the first one for simplicity)
-    for (size_t m = 0; m < data->meshes_count; ++m) {
-        cgltf_mesh* mesh = &data->meshes[m];
 
-        // Iterate over primitives (sub-meshes)
-        for (size_t p = 0; p < mesh->primitives_count; ++p) {
-            cgltf_primitive* primitive = &mesh->primitives[p];
-
-            // Pointers to the data we want
-            cgltf_accessor* posAccessor = nullptr;
-            cgltf_accessor* colorAccessor = nullptr;
-
-            // Find the attributes (POSITION, COLOR, etc.)
-            for (size_t a = 0; a < primitive->attributes_count; ++a) {
-                if (primitive->attributes[a].type == cgltf_attribute_type_position) {
-                    posAccessor = primitive->attributes[a].data;
-                }
-                if (primitive->attributes[a].type == cgltf_attribute_type_color) {
-                    colorAccessor = primitive->attributes[a].data;
-                }
-            }
-
-            // We NEED positions. If none, skip.
-            if (!posAccessor) continue;
-
-            // Read the data
-            for (size_t i = 0; i < posAccessor->count; ++i) {
-                Vertex v{};
-
-                // 1. Read Position (vec3)
-                cgltf_accessor_read_float(posAccessor, i, &v.pos.x, 3);
-                v.pos*=0.01f;
-                // 2. Read Color (vec3) - Optional, default to White if missing
-                if (colorAccessor) {
-                    cgltf_accessor_read_float(colorAccessor, i, &v.color.r, 3);
-                } else {
-                    v.color = {.5f, .5f, .5f}; // White default
-                }
-
-                outputVertices.push_back(v);
-            }
-        }
-    }
+    recLoad(data->nodes, glm::mat4(1.0f),outputVertices);
 
     cgltf_free(data);
     SDL_Log("Loaded GLTF: %s (%zu vertices)", filename.c_str(), outputVertices.size());
@@ -371,19 +383,21 @@ void createGraphicsPipeline() {
     colorBlending.logicOpEnable = VK_FALSE;
     colorBlending.attachmentCount = 1;
     colorBlending.pAttachments = &colorBlendAttachment;
-
-    // 8. Pipeline Layout (Uniforms/Global variables)
-    // Even if empty, we must create it.
-    VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
-    pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-    
-    if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
-        throw std::runtime_error("failed to create pipeline layout!");
-    }
     VkPushConstantRange pushConstantRange{};
     pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     pushConstantRange.offset = 0;
     pushConstantRange.size = sizeof(glm::mat4); // 64 
+    // 8. Pipeline Layout (Uniforms/Global variables)
+    // Even if empty, we must create it.
+    VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
+    pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
+       pipelineLayoutInfo.pushConstantRangeCount = 1; // <--- ADDED
+    pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
+    // ... 
+    if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
+        throw std::runtime_error("failed to create pipeline layout!");
+    }
+    
     // 9. THE GRAND FINALE: Create the Pipeline
     VkGraphicsPipelineCreateInfo pipelineInfo{};
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -406,9 +420,7 @@ void createGraphicsPipeline() {
     depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // "Closer" replaces "Farther"
     depthStencil.depthBoundsTestEnable = VK_FALSE;
     depthStencil.stencilTestEnable = VK_FALSE;
-    pipelineLayoutInfo.pushConstantRangeCount = 1; // <--- ADDED
-    pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-    // ...
+
     pipelineInfo.pDepthStencilState = &depthStencil; // <--- ADD THIS LINE
     // ... 
     if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
