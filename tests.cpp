@@ -93,7 +93,7 @@ std::vector<Vertex> vertices = {
 };
 
 // 1. Include the library implementation
-void recLoad(const cgltf_node *node, const glm::mat4 matrix, std::vector<Vertex> &outputVertices)
+void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex> &outputVertices)
 {
 
     glm::mat4 localMatrix;
@@ -153,12 +153,6 @@ void recLoad(const cgltf_node *node, const glm::mat4 matrix, std::vector<Vertex>
 
     for (size_t i = 0; i < node->children_count; i++)
     {
-        auto test = glm::mat4(1.0f);
-        if (node->has_matrix)
-        {
-            test = glm::tmat4x4<cgltf_float>(*node->matrix);
-        }
-
         recLoad(node->children[i], globalMatrix, outputVertices);
     }
 }
