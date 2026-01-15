@@ -93,67 +93,74 @@ std::vector<Vertex> vertices = {
 };
 
 // 1. Include the library implementation
-void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex> &outputVertices)
+void recLoad(const cgltf_node *node, const glm::mat4 matrix, std::vector<Vertex> &outputVertices)
 {
 
-    const auto mesh = node->mesh;
-
-    for (size_t p = 0; p < mesh->primitives_count; ++p)
-    {
-        cgltf_primitive *primitive = &mesh->primitives[p];
-
-        // Pointers to the data we want
-        cgltf_accessor *posAccessor = nullptr;
-        cgltf_accessor *colorAccessor = nullptr;
-
-        // Find the attributes (POSITION, COLOR, etc.)
-        for (size_t a = 0; a < primitive->attributes_count; ++a)
+    glm::mat4 localMatrix;
+    cgltf_node_transform_local(node, (float *)&localMatrix);
+    glm::mat4 globalMatrix = matrix * localMatrix;
+    if (node->mesh)
+        for (size_t p = 0; p < node->mesh->primitives_count; ++p)
         {
-            if (primitive->attributes[a].type == cgltf_attribute_type_position)
+            cgltf_primitive *primitive = &node->mesh->primitives[p];
+            glm::mat4 globalMatrix = matrix * localMatrix;
+            // Pointers to the data we want
+            cgltf_accessor *posAccessor = nullptr;
+            cgltf_accessor *colorAccessor = nullptr;
+
+            // Find the attributes (POSITION, COLOR, etc.)
+            for (size_t a = 0; a < primitive->attributes_count; ++a)
             {
-                posAccessor = primitive->attributes[a].data;
+                if (primitive->attributes[a].type == cgltf_attribute_type_position)
+                {
+                    posAccessor = primitive->attributes[a].data;
+                }
+                if (primitive->attributes[a].type == cgltf_attribute_type_color)
+                {
+                    colorAccessor = primitive->attributes[a].data;
+                }
             }
-            if (primitive->attributes[a].type == cgltf_attribute_type_color)
+
+            // We NEED positions. If none, skip.
+            if (!posAccessor)
+                continue;
+            size_t vertexCount = primitive->indices ? primitive->indices->count : posAccessor->count;
+            // Read the data
+            for (size_t k = 0; k < vertexCount; ++k)
             {
-                colorAccessor = primitive->attributes[a].data;
+                Vertex v{};
+                size_t index = k;
+                if (primitive->indices)
+                {
+                    index = cgltf_accessor_read_index(primitive->indices, k);
+                }
+                // 1. Read Position (vec3)
+                cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
+                v.pos = glm::vec4(v.pos, 1.0f) * globalMatrix;
+                v.pos *= 0.11f; // Scale down
+
+                if (colorAccessor)
+                {
+                    cgltf_accessor_read_float(colorAccessor, index, &v.color.r, 3);
+                }
+                else
+                {
+                    v.color = {0.5f, 0.5f, 0.5f};
+                }
+
+                outputVertices.push_back(v);
             }
         }
 
-        // We NEED positions. If none, skip.
-        if (!posAccessor)
-            continue;
-        size_t vertexCount = primitive->indices ? primitive->indices->count : posAccessor->count;
-        // Read the data
-        for (size_t k = 0; k < vertexCount; ++k)
-        {
-            Vertex v{};
-            size_t index = k;
-            if (primitive->indices)
-            {
-                index = cgltf_accessor_read_index(primitive->indices, k);
-            }
-            // 1. Read Position (vec3)
-            cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
-            v.pos = glm::vec4(v.pos, 1.0f) * matrix;
-            v.pos *= 0.11f; // Scale down
-
-            if (colorAccessor)
-            {
-                cgltf_accessor_read_float(colorAccessor, index, &v.color.r, 3);
-            }
-            else
-            {
-                v.color = {0.5f, 0.5f, 0.5f};
-            }
-
-            outputVertices.push_back(v);
-        }
-    }
     for (size_t i = 0; i < node->children_count; i++)
     {
-        auto test = glm::tmat4x4<cgltf_float>(*node->matrix);
+        auto test = glm::mat4(1.0f);
+        if (node->has_matrix)
+        {
+            test = glm::tmat4x4<cgltf_float>(*node->matrix);
+        }
 
-        recLoad(node->children[i], matrix * test, outputVertices);
+        recLoad(node->children[i], globalMatrix, outputVertices);
     }
 }
 std::vector<Vertex> loadGLTF(const std::string &filename)
@@ -178,9 +185,15 @@ std::vector<Vertex> loadGLTF(const std::string &filename)
         SDL_Log("Failed to load GLTF buffers");
         return {};
     }
-
-    recLoad(data->nodes, glm::mat4(1.0f), outputVertices);
-
+    // In loadGLTF:
+    if (data->scene)
+    {
+        for (size_t i = 0; i < data->scene->nodes_count; ++i)
+        {
+            // Start recursion on each root node found in the scene
+            recLoad(data->scene->nodes[i], glm::mat4(1.0f), outputVertices);
+        }
+    }
     cgltf_free(data);
     SDL_Log("Loaded GLTF: %s (%zu vertices)", filename.c_str(), outputVertices.size());
     return outputVertices;
