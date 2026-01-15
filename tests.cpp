@@ -74,7 +74,7 @@ struct Vertex {
         // Position
         attributeDescriptions[0].binding = 0;
         attributeDescriptions[0].location = 0; // Matches shader "layout(location = 0)"
-        attributeDescriptions[0].format = VK_FORMAT_R32G32_SFLOAT; // vec2
+        attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT; // vec2
         attributeDescriptions[0].offset = offsetof(Vertex, pos);
 
         // Color
@@ -1131,7 +1131,6 @@ SDL_AppResult SDL_AppIterate(void *appstate)
         // 2. View: Move camera BACK (positive Z) and UP slightly
         // Looking at (0,0,0) from (0, 1, 5)
         glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-
         // 3. Model: Identity (No rotation yet)
         
         angle += 0.01f; // Spin speed
