@@ -4,9 +4,6 @@
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #define CGLTF_IMPLEMENTATION
 
-
-
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/quaternion.hpp>
@@ -54,13 +51,14 @@ VkImage depthImage;
 VkDeviceMemory depthImageMemory;
 VkImageView depthImageView;
 
-
-struct Vertex {
+struct Vertex
+{
     glm::vec3 pos;
     glm::vec3 color;
 
     // 1. How big is one vertex? (Stride)
-    static VkVertexInputBindingDescription getBindingDescription() {
+    static VkVertexInputBindingDescription getBindingDescription()
+    {
         VkVertexInputBindingDescription bindingDescription{};
         bindingDescription.binding = 0;
         bindingDescription.stride = sizeof(Vertex);
@@ -69,18 +67,19 @@ struct Vertex {
     }
 
     // 2. What is inside? (Attributes: Position at loc 0, Color at loc 1)
-    static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions() {
+    static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions()
+    {
         std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions{};
 
         // Position
         attributeDescriptions[0].binding = 0;
-        attributeDescriptions[0].location = 0; // Matches shader "layout(location = 0)"
+        attributeDescriptions[0].location = 0;                        // Matches shader "layout(location = 0)"
         attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
         attributeDescriptions[0].offset = offsetof(Vertex, pos);
 
         // Color
         attributeDescriptions[1].binding = 0;
-        attributeDescriptions[1].location = 1; // Matches shader "layout(location = 1)"
+        attributeDescriptions[1].location = 1;                        // Matches shader "layout(location = 1)"
         attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
         attributeDescriptions[1].offset = offsetof(Vertex, color);
 
@@ -89,97 +88,106 @@ struct Vertex {
 };
 std::vector<Vertex> vertices = {
     {{0.0f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}}, // Top Red
-    {{0.5f, 0.5f, 0.0f},  {0.0f, 1.0f, 0.0f}}, // Right Green
+    {{0.5f, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},  // Right Green
     {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}}  // Left Blue
 };
 
 // 1. Include the library implementation
-void recLoad(const cgltf_node* node, const glm::mat4 &matrix,std::vector<Vertex> &outputVertices)
+void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex> &outputVertices)
 {
+
+    const auto mesh = node->mesh;
+
+    for (size_t p = 0; p < mesh->primitives_count; ++p)
+    {
+        cgltf_primitive *primitive = &mesh->primitives[p];
+
+        // Pointers to the data we want
+        cgltf_accessor *posAccessor = nullptr;
+        cgltf_accessor *colorAccessor = nullptr;
+
+        // Find the attributes (POSITION, COLOR, etc.)
+        for (size_t a = 0; a < primitive->attributes_count; ++a)
+        {
+            if (primitive->attributes[a].type == cgltf_attribute_type_position)
+            {
+                posAccessor = primitive->attributes[a].data;
+            }
+            if (primitive->attributes[a].type == cgltf_attribute_type_color)
+            {
+                colorAccessor = primitive->attributes[a].data;
+            }
+        }
+
+        // We NEED positions. If none, skip.
+        if (!posAccessor)
+            continue;
+        size_t vertexCount = primitive->indices ? primitive->indices->count : posAccessor->count;
+        // Read the data
+        for (size_t k = 0; k < vertexCount; ++k)
+        {
+            Vertex v{};
+            size_t index = k;
+            if (primitive->indices)
+            {
+                index = cgltf_accessor_read_index(primitive->indices, k);
+            }
+            // 1. Read Position (vec3)
+            cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
+            v.pos = glm::vec4(v.pos, 1.0f) * matrix;
+            v.pos *= 0.11f; // Scale down
+
+            if (colorAccessor)
+            {
+                cgltf_accessor_read_float(colorAccessor, index, &v.color.r, 3);
+            }
+            else
+            {
+                v.color = {0.5f, 0.5f, 0.5f};
+            }
+
+            outputVertices.push_back(v);
+        }
+    }
     for (size_t i = 0; i < node->children_count; i++)
     {
         auto test = glm::tmat4x4<cgltf_float>(*node->matrix);
 
-        const auto mesh = node->mesh;
-        for (size_t p = 0; p < mesh->primitives_count; ++p) {
-            cgltf_primitive* primitive = &mesh->primitives[p];
-
-            // Pointers to the data we want
-            cgltf_accessor* posAccessor = nullptr;
-            cgltf_accessor* colorAccessor = nullptr;
-
-            // Find the attributes (POSITION, COLOR, etc.)
-            for (size_t a = 0; a < primitive->attributes_count; ++a) {
-                if (primitive->attributes[a].type == cgltf_attribute_type_position) {
-                    posAccessor = primitive->attributes[a].data;
-                }
-                if (primitive->attributes[a].type == cgltf_attribute_type_color) {
-                    colorAccessor = primitive->attributes[a].data;
-                }
-            }
-
-            // We NEED positions. If none, skip.
-            if (!posAccessor) continue;
-            size_t vertexCount = primitive->indices ? primitive->indices->count : posAccessor->count;
-            // Read the data
-            for (size_t k = 0; k < vertexCount; ++k) {
-                Vertex v{};
-                size_t index = k;
-                if (primitive->indices) {
-                    index = cgltf_accessor_read_index(primitive->indices, k);
-                }
-                // 1. Read Position (vec3)
-                cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
-                v.pos=glm::vec4(v.pos,1.0f)*matrix;
-                v.pos *= 0.11f; // Scale down
-
-                if (colorAccessor) {
-                    cgltf_accessor_read_float(colorAccessor, index, &v.color.r, 3);
-                } else {
-                    v.color = {0.5f, 0.5f, 0.5f};
-                }
-
-                outputVertices.push_back(v);
-            }
-        }
-
-
-
-        recLoad(node->children[i],matrix*test,outputVertices);
+        recLoad(node->children[i], matrix * test, outputVertices);
     }
-
-    
 }
-std::vector<Vertex> loadGLTF(const std::string& filename) {
+std::vector<Vertex> loadGLTF(const std::string &filename)
+{
     std::vector<Vertex> outputVertices;
 
     cgltf_options options = {};
-    cgltf_data* data = nullptr;
+    cgltf_data *data = nullptr;
     cgltf_result result = cgltf_parse_file(&options, filename.c_str(), &data);
 
-    if (result != cgltf_result_success) {
+    if (result != cgltf_result_success)
+    {
         SDL_Log("Failed to parse GLTF: %s", filename.c_str());
         return {};
     }
 
     // Load the binary buffers (.bin files)
     result = cgltf_load_buffers(&options, data, filename.c_str());
-    if (result != cgltf_result_success) {
+    if (result != cgltf_result_success)
+    {
         cgltf_free(data);
         SDL_Log("Failed to load GLTF buffers");
         return {};
     }
 
-
-    recLoad(data->nodes, glm::mat4(1.0f),outputVertices);
+    recLoad(data->nodes, glm::mat4(1.0f), outputVertices);
 
     cgltf_free(data);
     SDL_Log("Loaded GLTF: %s (%zu vertices)", filename.c_str(), outputVertices.size());
     return outputVertices;
 }
 
-
-void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
+void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size)
+{
     // We need a temporary command buffer to tell the GPU to copy memory
     VkCommandBufferAllocateInfo allocInfo{};
     allocInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
@@ -187,7 +195,6 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
     allocInfo.commandPool = commandPool;
     allocInfo.commandBufferCount = 1;
 
-    VkCommandBuffer commandBuffer;
     vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer);
 
     VkCommandBufferBeginInfo beginInfo{};
@@ -195,9 +202,9 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
     beginInfo.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
 
     vkBeginCommandBuffer(commandBuffer, &beginInfo);
-        VkBufferCopy copyRegion{};
-        copyRegion.size = size;
-        vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
+    VkBufferCopy copyRegion{};
+    copyRegion.size = size;
+    vkCmdCopyBuffer(commandBuffer, srcBuffer, dstBuffer, 1, &copyRegion);
     vkEndCommandBuffer(commandBuffer);
 
     VkSubmitInfo submitInfo{};
@@ -214,20 +221,23 @@ void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size) {
 // The actual data
 
 // Helper to read binary files
-std::vector<char> readFile(const std::string& filename){ 
+std::vector<char> readFile(const std::string &filename)
+{
     // 1. Get the base path where the executable/resources are
-    const char* basePath = SDL_GetBasePath();
-    if (!basePath) {
+    const char *basePath = SDL_GetBasePath();
+    if (!basePath)
+    {
         // Fallback for safety, though SDL_Init usually handles this
-        basePath = ""; 
+        basePath = "";
     }
 
     std::string fullPath = std::string(basePath) + filename;
-    
+
     // 2. Open file (ate = at the end, to get size easily)
     std::ifstream file(fullPath, std::ios::ate | std::ios::binary);
 
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         SDL_Log("CRITICAL: Failed to open file: %s", fullPath.c_str());
         throw std::runtime_error("failed to open file!");
     }
@@ -242,16 +252,17 @@ std::vector<char> readFile(const std::string& filename){
     return buffer;
 }
 
-
-
 // A. Find valid memory type (Host Visible vs Device Local)
-uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
+uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties)
+{
     VkPhysicalDeviceMemoryProperties memProperties;
     vkGetPhysicalDeviceMemoryProperties(physicalDevice, &memProperties);
 
-    for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++) {
-        if ((typeFilter & (1 << i)) && 
-            (memProperties.memoryTypes[i].propertyFlags & properties) == properties) {
+    for (uint32_t i = 0; i < memProperties.memoryTypeCount; i++)
+    {
+        if ((typeFilter & (1 << i)) &&
+            (memProperties.memoryTypes[i].propertyFlags & properties) == properties)
+        {
             return i;
         }
     }
@@ -259,14 +270,16 @@ uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties) {
 }
 
 // B. Generic Buffer Creator
-void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory) {
+void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer &buffer, VkDeviceMemory &bufferMemory)
+{
     VkBufferCreateInfo bufferInfo{};
     bufferInfo.sType = VK_STRUCTURE_TYPE_BUFFER_CREATE_INFO;
     bufferInfo.size = size;
     bufferInfo.usage = usage;
     bufferInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-    if (vkCreateBuffer(device, &bufferInfo, nullptr, &buffer) != VK_SUCCESS) {
+    if (vkCreateBuffer(device, &bufferInfo, nullptr, &buffer) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to create buffer!");
     }
 
@@ -278,27 +291,31 @@ void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyF
     allocInfo.allocationSize = memRequirements.size;
     allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, properties);
 
-    if (vkAllocateMemory(device, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS) {
+    if (vkAllocateMemory(device, &allocInfo, nullptr, &bufferMemory) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to allocate buffer memory!");
     }
 
     vkBindBufferMemory(device, buffer, bufferMemory, 0);
 }
 // Helper to wrap SPIR-V bytecode into a Vulkan Module
-VkShaderModule createShaderModule(const std::vector<char>& code) {
+VkShaderModule createShaderModule(const std::vector<char> &code)
+{
     VkShaderModuleCreateInfo createInfo{};
     createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
     createInfo.codeSize = code.size();
-    createInfo.pCode = reinterpret_cast<const uint32_t*>(code.data());
-    
+    createInfo.pCode = reinterpret_cast<const uint32_t *>(code.data());
+
     VkShaderModule shaderModule;
-    if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS) {
+    if (vkCreateShaderModule(device, &createInfo, nullptr, &shaderModule) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to create shader module!");
     }
     return shaderModule;
 }
 
-void createGraphicsPipeline() {
+void createGraphicsPipeline()
+{
     auto vertShaderCode = readFile("vert.spv");
     auto fragShaderCode = readFile("frag.spv");
 
@@ -340,8 +357,8 @@ void createGraphicsPipeline() {
     VkViewport viewport{};
     viewport.x = 0.0f;
     viewport.y = 0.0f;
-    viewport.width = (float)swapChainExtent.width;
-    viewport.height = (float)swapChainExtent.height;
+    viewport.width = static_cast<float>(swapChainExtent.width);
+    viewport.height = static_cast<float>(swapChainExtent.height);
     viewport.minDepth = 0.0f;
     viewport.maxDepth = 1.0f;
 
@@ -386,18 +403,19 @@ void createGraphicsPipeline() {
     VkPushConstantRange pushConstantRange{};
     pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
     pushConstantRange.offset = 0;
-    pushConstantRange.size = sizeof(glm::mat4); // 64 
+    pushConstantRange.size = sizeof(glm::mat4); // 64
     // 8. Pipeline Layout (Uniforms/Global variables)
     // Even if empty, we must create it.
     VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
     pipelineLayoutInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_LAYOUT_CREATE_INFO;
-       pipelineLayoutInfo.pushConstantRangeCount = 1; // <--- ADDED
+    pipelineLayoutInfo.pushConstantRangeCount = 1; // <--- ADDED
     pipelineLayoutInfo.pPushConstantRanges = &pushConstantRange;
-    // ... 
-    if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS) {
+    // ...
+    if (vkCreatePipelineLayout(device, &pipelineLayoutInfo, nullptr, &pipelineLayout) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to create pipeline layout!");
     }
-    
+
     // 9. THE GRAND FINALE: Create the Pipeline
     VkGraphicsPipelineCreateInfo pipelineInfo{};
     pipelineInfo.sType = VK_STRUCTURE_TYPE_GRAPHICS_PIPELINE_CREATE_INFO;
@@ -412,44 +430,48 @@ void createGraphicsPipeline() {
     pipelineInfo.layout = pipelineLayout;
     pipelineInfo.renderPass = renderPass; // Compatible with our render pass
     pipelineInfo.subpass = 0;
-   // Add this struct definition
+    // Add this struct definition
     VkPipelineDepthStencilStateCreateInfo depthStencil{};
     depthStencil.sType = VK_STRUCTURE_TYPE_PIPELINE_DEPTH_STENCIL_STATE_CREATE_INFO;
-    depthStencil.depthTestEnable = VK_TRUE;  // Check Z
-    depthStencil.depthWriteEnable = VK_TRUE; // Write Z
+    depthStencil.depthTestEnable = VK_TRUE;           // Check Z
+    depthStencil.depthWriteEnable = VK_TRUE;          // Write Z
     depthStencil.depthCompareOp = VK_COMPARE_OP_LESS; // "Closer" replaces "Farther"
     depthStencil.depthBoundsTestEnable = VK_FALSE;
     depthStencil.stencilTestEnable = VK_FALSE;
 
     pipelineInfo.pDepthStencilState = &depthStencil; // <--- ADD THIS LINE
-    // ... 
-    if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS) {
+    // ...
+    if (vkCreateGraphicsPipelines(device, VK_NULL_HANDLE, 1, &pipelineInfo, nullptr, &graphicsPipeline) != VK_SUCCESS)
+    {
         SDL_Log("Graphics Pipeline failed creation!");
     }
 
     // Clean up the modules (the pipeline has copied the code, we don't need these anymore)
     vkDestroyShaderModule(device, fragShaderModule, nullptr);
     vkDestroyShaderModule(device, vertShaderModule, nullptr);
-    
+
     SDL_Log("Graphics Pipeline Created!");
 }
 
-
-VkFormat findDepthFormat() {
+VkFormat findDepthFormat()
+{
     std::vector<VkFormat> candidates = {VK_FORMAT_D32_SFLOAT, VK_FORMAT_D32_SFLOAT_S8_UINT, VK_FORMAT_D24_UNORM_S8_UINT};
-    for (VkFormat format : candidates) {
+    for (VkFormat format : candidates)
+    {
         VkFormatProperties props;
         vkGetPhysicalDeviceFormatProperties(physicalDevice, format, &props);
-        if ((props.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) == VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) {
+        if ((props.optimalTilingFeatures & VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT) == VK_FORMAT_FEATURE_DEPTH_STENCIL_ATTACHMENT_BIT)
+        {
             return format;
         }
     }
     throw std::runtime_error("failed to find supported depth format!");
 }
 
-void createDepthResources() {
+void createDepthResources()
+{
     VkFormat depthFormat = findDepthFormat();
-    
+
     // 1. Create the Image Object
     VkImageCreateInfo imageInfo{};
     imageInfo.sType = VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO;
@@ -466,7 +488,8 @@ void createDepthResources() {
     imageInfo.samples = VK_SAMPLE_COUNT_1_BIT;
     imageInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
-    if (vkCreateImage(device, &imageInfo, nullptr, &depthImage) != VK_SUCCESS) {
+    if (vkCreateImage(device, &imageInfo, nullptr, &depthImage) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to create depth image!");
     }
 
@@ -479,7 +502,8 @@ void createDepthResources() {
     allocInfo.allocationSize = memRequirements.size;
     allocInfo.memoryTypeIndex = findMemoryType(memRequirements.memoryTypeBits, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT);
 
-    if (vkAllocateMemory(device, &allocInfo, nullptr, &depthImageMemory) != VK_SUCCESS) {
+    if (vkAllocateMemory(device, &allocInfo, nullptr, &depthImageMemory) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to allocate depth image memory!");
     }
     vkBindImageMemory(device, depthImage, depthImageMemory, 0);
@@ -496,59 +520,67 @@ void createDepthResources() {
     viewInfo.subresourceRange.baseArrayLayer = 0;
     viewInfo.subresourceRange.layerCount = 1;
 
-    if (vkCreateImageView(device, &viewInfo, nullptr, &depthImageView) != VK_SUCCESS) {
+    if (vkCreateImageView(device, &viewInfo, nullptr, &depthImageView) != VK_SUCCESS)
+    {
         throw std::runtime_error("failed to create depth image view!");
     }
 }
 
-
-struct QueueFamilyIndices {
+struct QueueFamilyIndices
+{
     std::optional<uint32_t> graphicsFamily;
     std::optional<uint32_t> presentFamily;
 
-    bool isComplete() { 
-        return graphicsFamily.has_value() && presentFamily.has_value(); 
+    bool isComplete()
+    {
+        return graphicsFamily.has_value() && presentFamily.has_value();
     }
 };
-const std::vector<const char*> deviceExtensions = {
+const std::vector<const char *> deviceExtensions = {
     VK_KHR_SWAPCHAIN_EXTENSION_NAME
 
 };
 
-bool checkDeviceExtensionSupport(VkPhysicalDevice device) {
+bool checkDeviceExtensionSupport(VkPhysicalDevice p_device)
+{
     uint32_t extensionCount;
-    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, nullptr);
+    vkEnumerateDeviceExtensionProperties(p_device, nullptr, &extensionCount, nullptr);
 
     std::vector<VkExtensionProperties> availableExtensions(extensionCount);
-    vkEnumerateDeviceExtensionProperties(device, nullptr, &extensionCount, availableExtensions.data());
-	std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
-    for (const auto& extension : availableExtensions) 
+    vkEnumerateDeviceExtensionProperties(p_device, nullptr, &extensionCount, availableExtensions.data());
+    std::set<std::string> requiredExtensions(deviceExtensions.begin(), deviceExtensions.end());
+    for (const auto &extension : availableExtensions)
         requiredExtensions.erase(extension.extensionName);
-	return requiredExtensions.empty();
+    return requiredExtensions.empty();
 }
 
-QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface) {
+QueueFamilyIndices findQueueFamilies(VkPhysicalDevice p_device, VkSurfaceKHR surface_k)
+{
     QueueFamilyIndices indices;
-    
+
     uint32_t queueFamilyCount = 0;
-    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+    vkGetPhysicalDeviceQueueFamilyProperties(p_device, &queueFamilyCount, nullptr);
     std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
-    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+    vkGetPhysicalDeviceQueueFamilyProperties(p_device, &queueFamilyCount, queueFamilies.data());
 
     int i = 0;
-    for (const auto& queueFamily : queueFamilies) {
-        if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+    for (const auto &queueFamily : queueFamilies)
+    {
+        if (queueFamily.queueFlags & VK_QUEUE_GRAPHICS_BIT)
+        {
             indices.graphicsFamily = i;
         }
 
         VkBool32 presentSupport = false;
-        vkGetPhysicalDeviceSurfaceSupportKHR(device, i, surface, &presentSupport);
-        
-        if (presentSupport) {
+        vkGetPhysicalDeviceSurfaceSupportKHR(p_device, i, surface_k, &presentSupport);
+
+        if (presentSupport)
+        {
             indices.presentFamily = i;
         }
 
-        if (indices.isComplete()) {
+        if (indices.isComplete())
+        {
             break;
         }
 
@@ -558,47 +590,55 @@ QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surfa
     return indices;
 }
 
-struct TransformComponent {
-    glm::vec3 position; // 12 
+struct TransformComponent
+{
+    glm::vec3 position; // 12
     glm::quat rotation; // 16 bytes
     glm::vec3 scale;    // 12 bytes
 };
 // This array is cache-friendly and ready for parallel processing
 std::vector<TransformComponent> transforms;
 
-struct SwapchainSupportDetails {
+struct SwapchainSupportDetails
+{
     VkSurfaceCapabilitiesKHR capabilities;
     std::vector<VkSurfaceFormatKHR> formats;
     std::vector<VkPresentModeKHR> presentModes;
 };
 
-SwapchainSupportDetails querySwapchainSupport(VkPhysicalDevice device, VkSurfaceKHR surface) {
+SwapchainSupportDetails querySwapchainSupport(VkPhysicalDevice p_device, VkSurfaceKHR surface_k)
+{
     SwapchainSupportDetails details;
 
-    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(device, surface, &details.capabilities);
+    vkGetPhysicalDeviceSurfaceCapabilitiesKHR(p_device, surface_k, &details.capabilities);
 
     uint32_t formatCount;
-    vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, nullptr);
-    if (formatCount != 0) {
+    vkGetPhysicalDeviceSurfaceFormatsKHR(p_device, surface_k, &formatCount, nullptr);
+    if (formatCount != 0)
+    {
         details.formats.resize(formatCount);
-        vkGetPhysicalDeviceSurfaceFormatsKHR(device, surface, &formatCount, details.formats.data());
+        vkGetPhysicalDeviceSurfaceFormatsKHR(p_device, surface_k, &formatCount, details.formats.data());
     }
 
     // 3. Get Present Modes (VSync settings)
     uint32_t presentModeCount;
-    vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, nullptr);
-    if (presentModeCount != 0) {
+    vkGetPhysicalDeviceSurfacePresentModesKHR(p_device, surface_k, &presentModeCount, nullptr);
+    if (presentModeCount != 0)
+    {
         details.presentModes.resize(presentModeCount);
-        vkGetPhysicalDeviceSurfacePresentModesKHR(device, surface, &presentModeCount, details.presentModes.data());
+        vkGetPhysicalDeviceSurfacePresentModesKHR(p_device, surface_k, &presentModeCount, details.presentModes.data());
     }
 
     return details;
-} 
+}
 // A. Choose the best Color Format (We want SRGB usually)
-VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
-    for (const auto& availableFormat : availableFormats) {
-        if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB && 
-            availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR) {
+VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR> &availableFormats)
+{
+    for (const auto &availableFormat : availableFormats)
+    {
+        if (availableFormat.format == VK_FORMAT_B8G8R8A8_SRGB &&
+            availableFormat.colorSpace == VK_COLOR_SPACE_SRGB_NONLINEAR_KHR)
+        {
             return availableFormat;
         }
     }
@@ -607,10 +647,13 @@ VkSurfaceFormatKHR chooseSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>
 }
 
 // B. Choose Present Mode (Mailbox is best for low latency, FIFO is standard VSync)
-VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& availablePresentModes) {
-    for (const auto& availablePresentMode : availablePresentModes) {
+VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR> &availablePresentModes)
+{
+    for (const auto &availablePresentMode : availablePresentModes)
+    {
         // VK_PRESENT_MODE_MAILBOX_KHR = Triple Buffering (No Tearing, Low Latency)
-        if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR) {
+        if (availablePresentMode == VK_PRESENT_MODE_MAILBOX_KHR)
+        {
             return availablePresentMode;
         }
     }
@@ -619,23 +662,26 @@ VkPresentModeKHR chooseSwapPresentMode(const std::vector<VkPresentModeKHR>& avai
 }
 
 // C. Choose Resolution (Handle High-DPI screens correctly)
-VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, SDL_Window* window) {
-    if (capabilities.currentExtent.width != UINT32_MAX) {
+VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR &capabilities, SDL_Window *window_s)
+{
+    if (capabilities.currentExtent.width != UINT32_MAX)
+    {
         return capabilities.currentExtent;
-    } else {
+    }
+    else
+    {
         int width, height;
-        SDL_GetWindowSizeInPixels(window, &width, &height); // SDL3 function
+        SDL_GetWindowSizeInPixels(window_s, &width, &height); // SDL3 function
 
         VkExtent2D actualExtent = {
             static_cast<uint32_t>(width),
-            static_cast<uint32_t>(height)
-        };
+            static_cast<uint32_t>(height)};
 
         // Clamp to min/max supported by hardware
-        actualExtent.width = std::max(capabilities.minImageExtent.width, 
-                             std::min(capabilities.maxImageExtent.width, actualExtent.width));
-        actualExtent.height = std::max(capabilities.minImageExtent.height, 
-                              std::min(capabilities.maxImageExtent.height, actualExtent.height));
+        actualExtent.width = std::max(capabilities.minImageExtent.width,
+                                      std::min(capabilities.maxImageExtent.width, actualExtent.width));
+        actualExtent.height = std::max(capabilities.minImageExtent.height,
+                                       std::min(capabilities.maxImageExtent.height, actualExtent.height));
 
         return actualExtent;
     }
@@ -643,98 +689,102 @@ VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities, SDL_Wi
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
-	SDL_Init(SDL_INIT_VIDEO);
-	if (volkInitialize() != VK_SUCCESS) {
+    SDL_Init(SDL_INIT_VIDEO);
+    if (volkInitialize() != VK_SUCCESS)
+    {
         SDL_Log("Critical Error: Vulkan loader not found in the system.");
         return SDL_APP_FAILURE;
     }
-    window=SDL_CreateWindow("ManNG",800,600,SDL_WINDOW_VULKAN);
-	SDL_Vulkan_LoadLibrary(nullptr);
+    window = SDL_CreateWindow("ManNG", 800, 600, SDL_WINDOW_VULKAN);
+    SDL_Vulkan_LoadLibrary(nullptr);
     Uint32 extensionCount = 0;
-    const char* const* sdlExtensions = SDL_Vulkan_GetInstanceExtensions(&extensionCount);
+    const char *const *sdlExtensions = SDL_Vulkan_GetInstanceExtensions(&extensionCount);
 
-    if (sdlExtensions == nullptr) {
+    if (sdlExtensions == nullptr)
+    {
         SDL_Log("Error: SDL could not fetch Vulkan extensions: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-	
-    SDL_SetAppMetadata("My first window","0.0","com.test.test1");
+
+    SDL_SetAppMetadata("My first window", "0.0", "com.test.test1");
 
     uint32_t availableExtensionCount = 0;
     vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionCount, nullptr);
     std::vector<VkExtensionProperties> availableExtensions(availableExtensionCount);
     vkEnumerateInstanceExtensionProperties(nullptr, &availableExtensionCount, availableExtensions.data());
 
-    std::vector<const char*> extensions(sdlExtensions, sdlExtensions + extensionCount);
+    std::vector<const char *> extensions(sdlExtensions, sdlExtensions + extensionCount);
 
     bool portabilityAvailable = false;
-    for (const auto& ext : availableExtensions) {
-        if (strcmp(ext.extensionName, VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME) == 0) {
+    for (const auto &ext : availableExtensions)
+    {
+        if (strcmp(ext.extensionName, VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME) == 0)
+        {
             portabilityAvailable = true;
             break;
         }
     }
 
     VkInstanceCreateFlags createFlags = 0;
-    if (portabilityAvailable) {
+    if (portabilityAvailable)
+    {
         extensions.push_back(VK_KHR_PORTABILITY_ENUMERATION_EXTENSION_NAME);
         // Also add this dependency which is often required by portability
-        extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME); 
-        
+        extensions.push_back(VK_KHR_GET_PHYSICAL_DEVICE_PROPERTIES_2_EXTENSION_NAME);
+
         createFlags |= VK_INSTANCE_CREATE_ENUMERATE_PORTABILITY_BIT_KHR;
     }
-
 
     VkApplicationInfo appInfo = {};
     appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
     appInfo.pApplicationName = "My Vulkan Engine";
-    
-    appInfo.apiVersion = VK_API_VERSION_1_4; 
+
+    appInfo.apiVersion = VK_API_VERSION_1_4;
 
     VkInstanceCreateInfo createInfo = {};
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
     createInfo.pApplicationInfo = &appInfo;
-    
+
     createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
     createInfo.ppEnabledExtensionNames = extensions.data();
     createInfo.flags = createFlags;
-    
-    createInfo.enabledLayerCount = 0; 
 
-    VkResult result = vkCreateInstance(&createInfo, nullptr, &instance);
+    createInfo.enabledLayerCount = 0;
 
+    vkCreateInstance(&createInfo, nullptr, &instance);
 
     volkLoadInstance(instance);
 
-    if (!SDL_Vulkan_CreateSurface(window, instance, nullptr, &surface)) {
+    if (!SDL_Vulkan_CreateSurface(window, instance, nullptr, &surface))
+    {
         SDL_Log("Failed to create Vulkan Surface: %s", SDL_GetError());
         return SDL_APP_FAILURE;
     }
-	uint32_t deviceCount = 0;
-	vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
-	std::vector<VkPhysicalDevice> devices(deviceCount);
-	vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
-	QueueFamilyIndices indices;
+    uint32_t deviceCount = 0;
+    vkEnumeratePhysicalDevices(instance, &deviceCount, nullptr);
+    std::vector<VkPhysicalDevice> devices(deviceCount);
+    vkEnumeratePhysicalDevices(instance, &deviceCount, devices.data());
+    QueueFamilyIndices indices;
 
+    for (auto &device1 : devices)
+    {
+        QueueFamilyIndices currentIndices = findQueueFamilies(device1, surface);
+        bool extensionsSupported = checkDeviceExtensionSupport(device1);
+        VkPhysicalDeviceProperties properties;
+        vkGetPhysicalDeviceProperties(device1, &properties);
+        bool isDiscrete = properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU;
+        if (currentIndices.isComplete() && extensionsSupported)
+        {
 
-	for(auto& device1 : devices){
-		QueueFamilyIndices currentIndices = findQueueFamilies(device1,surface);
-		bool extensionsSupported = checkDeviceExtensionSupport(device1);
-		VkPhysicalDeviceProperties properties;
-    	vkGetPhysicalDeviceProperties(device1, &properties);
-    	bool isDiscrete = properties.deviceType == VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU;
-		if (currentIndices.isComplete() && extensionsSupported) {
-        
-			physicalDevice = device1;
-			indices = currentIndices; 
-			
-			if (isDiscrete) {
-				break; 
-			}
-		}
+            physicalDevice = device1;
+            indices = currentIndices;
 
-	}
-	
+            if (isDiscrete)
+            {
+                break;
+            }
+        }
+    }
 
     // ---------------------------------------------------------
     // STEP 3: CREATE LOGICAL DEVICE (The missing piece)
@@ -744,13 +794,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     // We use a set because if graphics & present are the same index, we only want ONE entry.
     std::set<uint32_t> uniqueQueueFamilies = {
         indices.graphicsFamily.value(),
-        indices.presentFamily.value()
-    };
+        indices.presentFamily.value()};
 
     std::vector<VkDeviceQueueCreateInfo> queueCreateInfos;
     float queuePriority = 1.0f; // 0.0 to 1.0 (Low to High priority)
 
-    for (uint32_t queueFamily : uniqueQueueFamilies) {
+    for (uint32_t queueFamily : uniqueQueueFamilies)
+    {
         VkDeviceQueueCreateInfo queueCreateInfo{};
         queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
         queueCreateInfo.queueFamilyIndex = queueFamily;
@@ -768,14 +818,15 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     deviceCreateInfo.queueCreateInfoCount = static_cast<uint32_t>(queueCreateInfos.size());
     deviceCreateInfo.pQueueCreateInfos = queueCreateInfos.data();
     deviceCreateInfo.pEnabledFeatures = &deviceFeatures;
-    
+
     // Pass the same extensions we checked earlier (Swapchain)
     deviceCreateInfo.enabledExtensionCount = static_cast<uint32_t>(deviceExtensions.size());
     deviceCreateInfo.ppEnabledExtensionNames = deviceExtensions.data();
 
     // D. The Actual Creation Call
     // NOTE: 'device' must be a global VkDevice variable (or stored in your app struct)
-    if (vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &device) != VK_SUCCESS) {
+    if (vkCreateDevice(physicalDevice, &deviceCreateInfo, nullptr, &device) != VK_SUCCESS)
+    {
         SDL_Log("Failed to create logical device!");
         return SDL_APP_FAILURE;
     }
@@ -793,7 +844,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     // ---------------------------------------------------------
     // STEP 4: CREATE SWAPCHAIN
     // ---------------------------------------------------------
-    
+
     SwapchainSupportDetails swapChainSupport = querySwapchainSupport(physicalDevice, surface);
 
     VkSurfaceFormatKHR surfaceFormat = chooseSwapSurfaceFormat(swapChainSupport.formats);
@@ -802,9 +853,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     // How many images? (Min + 1 is a safe bet to avoid stalling)
     uint32_t imageCount = swapChainSupport.capabilities.minImageCount + 1;
-    
+
     // Ensure we don't exceed the maximum
-    if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount) {
+    if (swapChainSupport.capabilities.maxImageCount > 0 && imageCount > swapChainSupport.capabilities.maxImageCount)
+    {
         imageCount = swapChainSupport.capabilities.maxImageCount;
     }
 
@@ -815,30 +867,34 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     scCreateInfo.imageFormat = surfaceFormat.format;
     scCreateInfo.imageColorSpace = surfaceFormat.colorSpace;
     scCreateInfo.imageExtent = extent;
-    scCreateInfo.imageArrayLayers = 1; // Always 1 unless doing VR/Stereo 3D
+    scCreateInfo.imageArrayLayers = 1;                             // Always 1 unless doing VR/Stereo 3D
     scCreateInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT; // We will render directly to these
 
     // Queue Management (Crucial if Graphics and Present queues are different)
     uint32_t queueFamilyIndicesArr[] = {indices.graphicsFamily.value(), indices.presentFamily.value()};
 
-    if (indices.graphicsFamily != indices.presentFamily) {
+    if (indices.graphicsFamily != indices.presentFamily)
+    {
         // Concurrent allows both queues to access the image without explicit ownership transfer
         // (Easier for beginners, slightly less performant)
         scCreateInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
         scCreateInfo.queueFamilyIndexCount = 2;
         scCreateInfo.pQueueFamilyIndices = queueFamilyIndicesArr;
-    } else {
+    }
+    else
+    {
         // Exclusive is faster (Best performance)
         scCreateInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
     }
 
     scCreateInfo.preTransform = swapChainSupport.capabilities.currentTransform; // No rotation/flipping
-    scCreateInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR; // Ignore window alpha channel
+    scCreateInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;            // Ignore window alpha channel
     scCreateInfo.presentMode = presentMode;
-    scCreateInfo.clipped = VK_TRUE; // Don't calculate pixels covered by other windows
+    scCreateInfo.clipped = VK_TRUE;             // Don't calculate pixels covered by other windows
     scCreateInfo.oldSwapchain = VK_NULL_HANDLE; // Used when resizing window later
 
-    if (vkCreateSwapchainKHR(device, &scCreateInfo, nullptr, &swapChain) != VK_SUCCESS) {
+    if (vkCreateSwapchainKHR(device, &scCreateInfo, nullptr, &swapChain) != VK_SUCCESS)
+    {
         SDL_Log("Failed to create swap chain!");
         return SDL_APP_FAILURE;
     }
@@ -851,52 +907,51 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     // Store format/extent for later use
     swapChainImageFormat = surfaceFormat.format;
     swapChainExtent = extent;
-    
+
     SDL_Log("Swapchain Created! Images: %d, Size: %dx%d", imageCount, extent.width, extent.height);
-    
-    
+
     // ---------------------------------------------------------
     // STEP 5: CREATE IMAGE VIEWS (You were missing this!)
     // ---------------------------------------------------------
     swapChainImageViews.resize(swapChainImages.size());
 
-    for (size_t i = 0; i < swapChainImages.size(); i++) {
-        VkImageViewCreateInfo createInfo{};
-        createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
-        createInfo.image = swapChainImages[i];
-        createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
-        createInfo.format = swapChainImageFormat;
-        
-        // Map colors normally (R -> R, G -> G, etc.)
-        createInfo.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
-        createInfo.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
-        createInfo.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
-        createInfo.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
-        
-        // Describe the image part we want to access
-        createInfo.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
-        createInfo.subresourceRange.baseMipLevel = 0;
-        createInfo.subresourceRange.levelCount = 1;
-        createInfo.subresourceRange.baseArrayLayer = 0;
-        createInfo.subresourceRange.layerCount = 1;
+    for (size_t i = 0; i < swapChainImages.size(); i++)
+    {
+        VkImageViewCreateInfo view_create_info{};
+        view_create_info.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+        view_create_info.image = swapChainImages[i];
+        view_create_info.viewType = VK_IMAGE_VIEW_TYPE_2D;
+        view_create_info.format = swapChainImageFormat;
 
-        if (vkCreateImageView(device, &createInfo, nullptr, &swapChainImageViews[i]) != VK_SUCCESS) {
+        // Map colors normally (R -> R, G -> G, etc.)
+        view_create_info.components.r = VK_COMPONENT_SWIZZLE_IDENTITY;
+        view_create_info.components.g = VK_COMPONENT_SWIZZLE_IDENTITY;
+        view_create_info.components.b = VK_COMPONENT_SWIZZLE_IDENTITY;
+        view_create_info.components.a = VK_COMPONENT_SWIZZLE_IDENTITY;
+
+        // Describe the image part we want to access
+        view_create_info.subresourceRange.aspectMask = VK_IMAGE_ASPECT_COLOR_BIT;
+        view_create_info.subresourceRange.baseMipLevel = 0;
+        view_create_info.subresourceRange.levelCount = 1;
+        view_create_info.subresourceRange.baseArrayLayer = 0;
+        view_create_info.subresourceRange.layerCount = 1;
+
+        if (vkCreateImageView(device, &view_create_info, nullptr, &swapChainImageViews[i]) != VK_SUCCESS)
+        {
             SDL_Log("Failed to create image views!");
             return SDL_APP_FAILURE;
         }
     }
-    
-    SDL_Log("Step 5: Image Views Created Successfully! Count: %zu", swapChainImageViews.size());;
+
+    SDL_Log("Step 5: Image Views Created Successfully! Count: %zu", swapChainImageViews.size());
+    ;
     // ---------------------------------------------------------
     // STEP 6: CREATE RENDER PASS
     // ---------------------------------------------------------
-    
-
-
 
     // 3. Subpass Dependency (Synchronization)
     // We need to wait for the swapchain to give us an image before we can draw on it.
-   // ---------------------------------------------------------
+    // ---------------------------------------------------------
     // STEP 6: CREATE RENDER PASS (Updated for Depth)
     // ---------------------------------------------------------
     VkAttachmentDescription colorAttachment{};
@@ -948,18 +1003,19 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     VkRenderPassCreateInfo renderPassInfo{};
     renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_CREATE_INFO;
-    renderPassInfo.attachmentCount = 1;
-    renderPassInfo.pAttachments = &colorAttachment;
+    renderPassInfo.attachmentCount = 2;
+    renderPassInfo.pAttachments = &attachments[0];
     renderPassInfo.subpassCount = 1;
     renderPassInfo.pSubpasses = &subpass;
     renderPassInfo.dependencyCount = 1;
     renderPassInfo.pDependencies = &dependency;
 
-    if (vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS) {
+    if (vkCreateRenderPass(device, &renderPassInfo, nullptr, &renderPass) != VK_SUCCESS)
+    {
         SDL_Log("Failed to create render pass!");
         return SDL_APP_FAILURE;
     }
-    
+
     SDL_Log("Render Pass Created Successfully!");
     // ---------------------------------------------------------
     // STEP 7: CREATE FRAMEBUFFERS
@@ -967,29 +1023,31 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     createGraphicsPipeline();
     swapChainFramebuffers.resize(swapChainImageViews.size());
 
-    for (size_t i = 0; i < swapChainImageViews.size(); i++) {
-        std::array<VkImageView, 2> attachments = {
+    for (size_t i = 0; i < swapChainImageViews.size(); i++)
+    {
+        std::array<VkImageView, 2> image_views = {
             swapChainImageViews[i],
-            depthImageView 
-        };
+            depthImageView};
 
         VkFramebufferCreateInfo framebufferInfo{};
         framebufferInfo.sType = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO;
         framebufferInfo.renderPass = renderPass;
-        framebufferInfo.attachmentCount = static_cast<uint32_t>(attachments.size());
-        framebufferInfo.pAttachments = attachments.data();
+        framebufferInfo.attachmentCount = static_cast<uint32_t>(image_views.size());
+        framebufferInfo.pAttachments = image_views.data();
         framebufferInfo.width = swapChainExtent.width;
         framebufferInfo.height = swapChainExtent.height;
         framebufferInfo.layers = 1;
 
-        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
+        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS)
+        {
             SDL_Log("Failed to create framebuffer %zu!", i);
             return SDL_APP_FAILURE;
         }
-    
-    SDL_Log("Step 7: Framebuffers Created Successfully! Count: %zu", swapChainFramebuffers.size());
 
-        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS) {
+        SDL_Log("Step 7: Framebuffers Created Successfully! Count: %zu", swapChainFramebuffers.size());
+
+        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS)
+        {
             SDL_Log("Failed to create framebuffer!");
             return SDL_APP_FAILURE;
         }
@@ -1000,11 +1058,12 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     VkCommandPoolCreateInfo poolInfo{};
     poolInfo.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
     poolInfo.flags = VK_COMMAND_POOL_CREATE_RESET_COMMAND_BUFFER_BIT;
-    poolInfo.queueFamilyIndex = indices.graphicsFamily.value(); 
+    poolInfo.queueFamilyIndex = indices.graphicsFamily.value();
 
-    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS) {
-        SDL_Log("Failed to create command pool!"); 
-        return SDL_APP_FAILURE; 
+    if (vkCreateCommandPool(device, &poolInfo, nullptr, &commandPool) != VK_SUCCESS)
+    {
+        SDL_Log("Failed to create command pool!");
+        return SDL_APP_FAILURE;
     }
 
     VkCommandBufferAllocateInfo allocInfo{};
@@ -1013,9 +1072,10 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     allocInfo.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
     allocInfo.commandBufferCount = 1;
 
-    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS) {
-        SDL_Log("Failed to allocate command buffer!"); 
-        return SDL_APP_FAILURE; 
+    if (vkAllocateCommandBuffers(device, &allocInfo, &commandBuffer) != VK_SUCCESS)
+    {
+        SDL_Log("Failed to allocate command buffer!");
+        return SDL_APP_FAILURE;
     }
 
     // 2. Create Sync Objects (Semaphores & Fence)
@@ -1028,83 +1088,78 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 
     if (vkCreateSemaphore(device, &semaphoreInfo, nullptr, &imageAvailableSemaphore) != VK_SUCCESS ||
         vkCreateSemaphore(device, &semaphoreInfo, nullptr, &renderFinishedSemaphore) != VK_SUCCESS ||
-        vkCreateFence(device, &fenceInfo, nullptr, &inFlightFence) != VK_SUCCESS) {
-        SDL_Log("Failed to create sync objects!"); 
-        return SDL_APP_FAILURE; 
+        vkCreateFence(device, &fenceInfo, nullptr, &inFlightFence) != VK_SUCCESS)
+    {
+        SDL_Log("Failed to create sync objects!");
+        return SDL_APP_FAILURE;
     }
     createDepthResources();
-    
-    std::string modelPath = std::string(SDL_GetBasePath()) + "Audi R8.glb"; 
+
+    std::string modelPath = std::string(SDL_GetBasePath()) + "Audi R8.glb";
     vertices = loadGLTF(modelPath);
 
     // Fallback if file missing:
-    if (vertices.empty()) {
+    if (vertices.empty())
+    {
         SDL_Log("Model not found, loading fallback triangle.");
         vertices = {
             {{0.0f, -0.5f, 0.0f}, {1.0f, 0.0f, 0.0f}},
-            {{0.5f, 0.5f, 0.0f},  {0.0f, 1.0f, 0.0f}},
-            {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}}
-        };
+            {{0.5f, 0.5f, 0.0f}, {0.0f, 1.0f, 0.0f}},
+            {{-0.5f, 0.5f, 0.0f}, {0.0f, 0.0f, 1.0f}}};
     }
 
-    
     VkDeviceSize bufferSize = sizeof(vertices[0]) * vertices.size();
 
     createBuffer(bufferSize,
-             VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
-             VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-             vertexBuffer,
-             vertexBufferMemory);
+                 VK_BUFFER_USAGE_VERTEX_BUFFER_BIT,
+                 VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
+                 vertexBuffer,
+                 vertexBufferMemory);
 
-    void* data;
+    void *data;
     vkMapMemory(device, vertexBufferMemory, 0, bufferSize, 0, &data);
     memcpy(data, vertices.data(), (size_t)bufferSize);
     vkUnmapMemory(device, vertexBufferMemory);
 
     // ----------------------------------------
 
-    return SDL_APP_CONTINUE;  /* carry on with the program! */
+    return SDL_APP_CONTINUE; /* carry on with the program! */
 }
- 
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 {
-    if (event->type == SDL_EVENT_QUIT) {
-        return SDL_APP_SUCCESS;  /* end the program, reporting success to the OS. */
+    if (event->type == SDL_EVENT_QUIT)
+    {
+        return SDL_APP_SUCCESS; /* end the program, reporting success to the OS. */
     }
 
-	if(event->type == SDL_EVENT_WINDOW_RESIZED)
-	{
-		int x=1,y=2;
-		if (!SDL_GetWindowSize(window,&x,&y))
-		{
-			 SDL_Log("Couldn't resize window/renderer: %s", SDL_GetError());
-		}
+    if (event->type == SDL_EVENT_WINDOW_RESIZED)
+    {
+        int x = 1, y = 2;
+        if (!SDL_GetWindowSize(window, &x, &y))
+        {
+            SDL_Log("Couldn't resize window/renderer: %s", SDL_GetError());
+        }
+    }
 
-		
-		
-	}
-    
-    
-
-    return SDL_APP_CONTINUE;  /* carry on with the program! */
+    return SDL_APP_CONTINUE; /* carry on with the program! */
 }
-
 
 static float angle = 0.0f;
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
     // 1. WAIT for the previous frame to finish
     vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
-    
+
     // 2. ACQUIRE the next image from the swapchain
     uint32_t imageIndex;
     VkResult result = vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex);
 
-    if (result == VK_ERROR_OUT_OF_DATE_KHR) {
-        // Window resized? We should recreate swapchain here. 
+    if (result == VK_ERROR_OUT_OF_DATE_KHR)
+    {
+        // Window resized? We should recreate swapchain here.
         // For now, just ignoring it or returning safely prevents a crash.
-        return SDL_APP_CONTINUE; 
+        return SDL_APP_CONTINUE;
     }
 
     // 3. RESET Fence (Close the gate)
@@ -1112,7 +1167,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // 4. RECORD Command Buffer
     vkResetCommandBuffer(commandBuffer, 0);
-    
+
     VkCommandBufferBeginInfo beginInfo{};
     beginInfo.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     vkBeginCommandBuffer(commandBuffer, &beginInfo);
@@ -1132,27 +1187,27 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     renderPassInfo.pClearValues = clearValues.data();
 
     vkCmdBeginRenderPass(commandBuffer, &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-        vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
-        VkBuffer vertexBuffers[] = {vertexBuffer}; // Make sure 'vertexBuffer' is your global buffer handle
-        VkDeviceSize offsets[] = {0};
-        vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
-        // 1. Projection: standard 45 FOV
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 1000.0f);
-        projection[1][1] *= -1; // Flip Y for Vulkan
+    vkCmdBindPipeline(commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, graphicsPipeline);
+    VkBuffer vertexBuffers[] = {vertexBuffer}; // Make sure 'vertexBuffer' is your global buffer handle
+    VkDeviceSize offsets[] = {0};
+    vkCmdBindVertexBuffers(commandBuffer, 0, 1, vertexBuffers, offsets);
+    // 1. Projection: standard 45 FOV
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 1000.0f);
+    projection[1][1] *= -1; // Flip Y for Vulkan
 
-        // 2. View: Move camera BACK (positive Z) and UP slightly
-        // Looking at (0,0,0) from (0, 1, 5)
-        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        // 3. Model: Identity (No rotation yet)
-        
-        angle += 0.01f; // Spin speed
-        glm::mat4 model = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f));
-        // Scale it down just in case the model is HUGE
-        model = glm::scale(model, glm::vec3(1.0f)); 
+    // 2. View: Move camera BACK (positive Z) and UP slightly
+    // Looking at (0,0,0) from (0, 1, 5)
+    glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    // 3. Model: Identity (No rotation yet)
 
-        glm::mat4 meshMatrix = projection*view*model;  
-        vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
-        vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
+    angle += 0.01f; // Spin speed
+    glm::mat4 model = glm::rotate(glm::mat4(1.0f), angle, glm::vec3(0.0f, 1.0f, 0.0f));
+    // Scale it down just in case the model is HUGE
+    model = glm::scale(model, glm::vec3(1.0f));
+
+    glm::mat4 meshMatrix = projection * view * model;
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
+    vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);
     vkEndCommandBuffer(commandBuffer);
@@ -1174,7 +1229,8 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
 
-    if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFence) != VK_SUCCESS) {
+    if (vkQueueSubmit(graphicsQueue, 1, &submitInfo, inFlightFence) != VK_SUCCESS)
+    {
         SDL_Log("Failed to submit draw command buffer!");
         return SDL_APP_FAILURE;
     }
@@ -1193,11 +1249,6 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     return SDL_APP_CONTINUE;
 }
 
-
-	
 void SDL_AppQuit(void *appstate, SDL_AppResult result)
 {
-
 }
-
-
