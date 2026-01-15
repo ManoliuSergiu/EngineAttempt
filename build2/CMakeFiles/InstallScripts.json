@@ -1,9 +1,0 @@
-{
-	"InstallScripts" : 
-	[
-		"/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/cmake_install.cmake",
-		"/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/cmake_install.cmake",
-		"/Users/sergiumanoliu/GameEngine1/EngineAttempt/build2/_deps/glm-build/glm/cmake_install.cmake"
-	],
-	"Parallel" : false
-}
