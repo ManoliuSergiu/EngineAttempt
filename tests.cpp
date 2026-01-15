@@ -98,12 +98,11 @@ void recLoad(const cgltf_node *node, const glm::mat4 matrix, std::vector<Vertex>
 
     glm::mat4 localMatrix;
     cgltf_node_transform_local(node, (float *)&localMatrix);
-    glm::mat4 globalMatrix = matrix * localMatrix;
+    glm::mat4 globalMatrix =  localMatrix* matrix ;
     if (node->mesh)
         for (size_t p = 0; p < node->mesh->primitives_count; ++p)
         {
             cgltf_primitive *primitive = &node->mesh->primitives[p];
-            glm::mat4 globalMatrix = matrix * localMatrix;
             // Pointers to the data we want
             cgltf_accessor *posAccessor = nullptr;
             cgltf_accessor *colorAccessor = nullptr;
@@ -136,7 +135,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 matrix, std::vector<Vertex>
                 }
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
-                v.pos = glm::vec4(v.pos, 1.0f) * globalMatrix;
+                v.pos = glm::vec3(globalMatrix*glm::vec4(v.pos, 1.0f));
                 v.pos *= 0.11f; // Scale down
 
                 if (colorAccessor)
