@@ -18,7 +18,7 @@ void main() {
     float distance = length(lp +pos);
     float attenuation =  constants.lightIntensity.x / (distance*distance );
     float x = dot( normalized_normal, lp+pos);
-    vec4 baseColor = vec4(1.0f)*0.1f+x*constants.lightColor*0.9f;
+    vec4 baseColor = vec4(1.0f)*0.1f+constants.lightColor*0.9f;
     
     outColor = baseColor; 
 }

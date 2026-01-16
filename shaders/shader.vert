@@ -12,10 +12,9 @@ layout(location = 2) out vec3 pos;
 layout(push_constant) uniform PushConstants {
     mat4 render_matrix; 
     mat4 model;
-    vec3 lightPos;
-    vec3 lightColor;
-    vec3 camPos;
-    vec3 lightIntensity;
+    vec4 lightPos;
+    vec4 lightColor;
+    vec4 lightIntensity;
 } constants;
 
 void main() {
