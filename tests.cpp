@@ -55,7 +55,7 @@ struct Vertex
 {
     glm::vec3 pos;
     glm::vec3 color;
-
+    glm::vec3 normal;
     // 1. How big is one vertex? (Stride)
     static VkVertexInputBindingDescription getBindingDescription()
     {
@@ -83,6 +83,12 @@ struct Vertex
         attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
         attributeDescriptions[1].offset = offsetof(Vertex, color);
 
+        //Normal
+        attributeDescriptions[2].binding = 0;
+        attributeDescriptions[2].location = 2;                        // Matches shader "layout(location = 2)"
+        attributeDescriptions[2].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
+        attributeDescriptions[2].offset = offsetof(Vertex, normal); 
+
         return attributeDescriptions;
     }
 };
@@ -98,7 +104,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
 
     glm::mat4 localMatrix;
     cgltf_node_transform_local(node, (float *)&localMatrix);
-    glm::mat4 globalMatrix =  localMatrix* matrix ;
+    glm::mat4 globalMatrix =  matrix* localMatrix ;
     if (node->mesh)
         for (size_t p = 0; p < node->mesh->primitives_count; ++p)
         {
@@ -106,7 +112,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
             // Pointers to the data we want
             cgltf_accessor *posAccessor = nullptr;
             cgltf_accessor *colorAccessor = nullptr;
-
+            cgltf_accessor *normalAccessor = nullptr;
             // Find the attributes (POSITION, COLOR, etc.)
             for (size_t a = 0; a < primitive->attributes_count; ++a)
             {
@@ -115,6 +121,10 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                     posAccessor = primitive->attributes[a].data;
                 }
                 if (primitive->attributes[a].type == cgltf_attribute_type_color)
+                {
+                    colorAccessor = primitive->attributes[a].data;
+                }
+                if (primitive->attributes[a].type == cgltf_attribute_type_normal)
                 {
                     colorAccessor = primitive->attributes[a].data;
                 }
@@ -136,7 +146,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
                 v.pos = glm::vec3(globalMatrix*glm::vec4(v.pos, 1.0f));
-                v.pos *= 0.11f; // Scale down
+                v.pos *= 0.51f; // Scale down
 
                 if (colorAccessor)
                 {
@@ -146,6 +156,14 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                 {
                     v.color = {0.5f, 0.5f, 0.5f};
                 }
+                if(normalAccessor)
+                {
+                    cgltf_accessor_read_float(normalAccessor,index, &v.normal.r, 3);
+                }
+                else
+                {
+                    v.normal = glm::vec3({0.0f,1.0f,0.0f});
+                }
 
                 outputVertices.push_back(v);
             }
@@ -153,7 +171,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
 
     for (size_t i = 0; i < node->children_count; i++)
     {
-        recLoad(node->children[i], globalMatrix, outputVertices);
+        recLoad(node->children[i], glm::mat4(1.0f), outputVertices);
     }
 }
 std::vector<Vertex> loadGLTF(const std::string &filename)
@@ -701,7 +719,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Critical Error: Vulkan loader not found in the system.");
         return SDL_APP_FAILURE;
     }
-    window = SDL_CreateWindow("ManNG", 800, 600, SDL_WINDOW_VULKAN);
+    window = SDL_CreateWindow("ManNG", 800, 600, SDL_WINDOW_VULKAN | SDL_WINDOW_RESIZABLE);
     SDL_Vulkan_LoadLibrary(nullptr);
     Uint32 extensionCount = 0;
     const char *const *sdlExtensions = SDL_Vulkan_GetInstanceExtensions(&extensionCount);
@@ -1023,11 +1041,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     }
 
     SDL_Log("Render Pass Created Successfully!");
+    createDepthResources();
     // ---------------------------------------------------------
     // STEP 7: CREATE FRAMEBUFFERS
     // ---------------------------------------------------------
     createGraphicsPipeline();
     swapChainFramebuffers.resize(swapChainImageViews.size());
+
 
     for (size_t i = 0; i < swapChainImageViews.size(); i++)
     {
@@ -1050,13 +1070,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
             return SDL_APP_FAILURE;
         }
 
-        SDL_Log("Step 7: Framebuffers Created Successfully! Count: %zu", swapChainFramebuffers.size());
-
-        if (vkCreateFramebuffer(device, &framebufferInfo, nullptr, &swapChainFramebuffers[i]) != VK_SUCCESS)
-        {
-            SDL_Log("Failed to create framebuffer!");
-            return SDL_APP_FAILURE;
-        }
+       
     }
     // ... [Previous setup: Instance -> Device -> Swapchain -> RenderPass -> Pipeline]
 
@@ -1099,8 +1113,6 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
         SDL_Log("Failed to create sync objects!");
         return SDL_APP_FAILURE;
     }
-    createDepthResources();
-
     std::string modelPath = std::string(SDL_GetBasePath()) + "Audi R8.glb";
     vertices = loadGLTF(modelPath);
 
@@ -1152,6 +1164,10 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 }
 
 static float angle = 0.0f;
+static glm::vec3 lightPos({5,5,2});
+static glm::vec3 lightColor({1,1,1});
+static glm::vec3 camPos({0,1,5});
+
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
     // 1. WAIT for the previous frame to finish
@@ -1203,7 +1219,7 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     // 2. View: Move camera BACK (positive Z) and UP slightly
     // Looking at (0,0,0) from (0, 1, 5)
-    glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    glm::mat4 view = glm::lookAt(camPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     // 3. Model: Identity (No rotation yet)
 
     angle += 0.01f; // Spin speed
@@ -1213,6 +1229,9 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     glm::mat4 meshMatrix = projection * view * model;
     vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 1, sizeof(glm::vec3), &lightPos);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 2, sizeof(glm::vec3), &lightColor);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 3, sizeof(glm::vec3), &camPos);
     vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);
