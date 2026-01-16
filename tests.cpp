@@ -451,6 +451,7 @@ void createGraphicsPipeline()
     pipelineInfo.pRasterizationState = &rasterizer;
     pipelineInfo.pMultisampleState = &multisampling;
     pipelineInfo.pColorBlendState = &colorBlending;
+
     pipelineInfo.layout = pipelineLayout;
     pipelineInfo.renderPass = renderPass; // Compatible with our render pass
     pipelineInfo.subpass = 0;
