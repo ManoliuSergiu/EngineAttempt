@@ -1165,10 +1165,10 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 }
 
 static float angle = 0.0f;
-static glm::vec3 lightPos({5,5,2});
-static glm::vec3 lightColor({1,1,1});
-static glm::vec3 camPos({0,1,5});
-
+glm::vec4 lightPos({1,-1,1,1});
+glm::vec4 lightColor({1,0,0,1});
+glm::vec3 camPos({0,1,5});
+glm::vec4 lightIntensity({1.0f,1.0f,1.0f,1});
 
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
@@ -1233,11 +1233,13 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     size_t loc = 0;
     vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::mat4), &meshMatrix);
     loc+=sizeof(glm::mat4);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &lightPos);
-    loc+=sizeof(glm::vec3);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &lightColor);
-    loc+=sizeof(glm::vec3);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &camPos);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::mat4), &model);
+    loc+=sizeof(glm::mat4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightPos);
+    loc+=sizeof(glm::vec4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightColor);
+    loc+=sizeof(glm::vec4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightIntensity);
     vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);
