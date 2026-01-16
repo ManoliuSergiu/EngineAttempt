@@ -67,9 +67,9 @@ struct Vertex
     }
 
     // 2. What is inside? (Attributes: Position at loc 0, Color at loc 1)
-    static std::array<VkVertexInputAttributeDescription, 2> getAttributeDescriptions()
+    static std::array<VkVertexInputAttributeDescription, 3> getAttributeDescriptions()
     {
-        std::array<VkVertexInputAttributeDescription, 2> attributeDescriptions{};
+        std::array<VkVertexInputAttributeDescription, 3> attributeDescriptions{};
 
         // Position
         attributeDescriptions[0].binding = 0;
@@ -1169,6 +1169,7 @@ static glm::vec3 lightPos({5,5,2});
 static glm::vec3 lightColor({1,1,1});
 static glm::vec3 camPos({0,1,5});
 
+
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
     // 1. WAIT for the previous frame to finish
@@ -1229,10 +1230,14 @@ SDL_AppResult SDL_AppIterate(void *appstate)
     model = glm::scale(model, glm::vec3(1.0f));
 
     glm::mat4 meshMatrix = projection * view * model;
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 0, sizeof(glm::mat4), &meshMatrix);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 1, sizeof(glm::vec3), &lightPos);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 2, sizeof(glm::vec3), &lightColor);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, 3, sizeof(glm::vec3), &camPos);
+    size_t loc = 0;
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::mat4), &meshMatrix);
+    loc+=sizeof(glm::mat4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &lightPos);
+    loc+=sizeof(glm::vec3);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &lightColor);
+    loc+=sizeof(glm::vec3);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec3), &camPos);
     vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);

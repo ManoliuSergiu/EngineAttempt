@@ -25,4 +25,5 @@ void main() {
     gl_Position = constants.render_matrix * vec4(inPosition, 1.0);
 
     outNormal =vec3(constants.render_matrix * vec4(normal,1.0f) );
+    //outNormal=vec3(1.0f);
 }
