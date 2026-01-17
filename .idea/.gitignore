@@ -3,7 +3,6 @@
 /workspace.xml
 /build/
 /build2/
-/src/
 /cmake-build-debug/
 # Ignored default folder with query files
 /queries/
