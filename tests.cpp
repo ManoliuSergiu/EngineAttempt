@@ -83,11 +83,11 @@ struct Vertex
         attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
         attributeDescriptions[1].offset = offsetof(Vertex, color);
 
-        //Normal
+        // Normal
         attributeDescriptions[2].binding = 0;
         attributeDescriptions[2].location = 2;                        // Matches shader "layout(location = 2)"
         attributeDescriptions[2].format = VK_FORMAT_R32G32B32_SFLOAT; // vec3
-        attributeDescriptions[2].offset = offsetof(Vertex, normal); 
+        attributeDescriptions[2].offset = offsetof(Vertex, normal);
 
         return attributeDescriptions;
     }
@@ -104,7 +104,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
 
     glm::mat4 localMatrix;
     cgltf_node_transform_local(node, (float *)&localMatrix);
-    glm::mat4 globalMatrix =  matrix* localMatrix ;
+    glm::mat4 globalMatrix = matrix * localMatrix;
     if (node->mesh)
         for (size_t p = 0; p < node->mesh->primitives_count; ++p)
         {
@@ -126,7 +126,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                 }
                 if (primitive->attributes[a].type == cgltf_attribute_type_normal)
                 {
-                    colorAccessor = primitive->attributes[a].data;
+                    normalAccessor = primitive->attributes[a].data;
                 }
             }
 
@@ -145,7 +145,7 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                 }
                 // 1. Read Position (vec3)
                 cgltf_accessor_read_float(posAccessor, index, &v.pos.x, 3);
-                v.pos = glm::vec3(globalMatrix*glm::vec4(v.pos, 1.0f));
+                v.pos = glm::vec3(globalMatrix * glm::vec4(v.pos, 1.0f));
                 v.pos *= 0.51f; // Scale down
 
                 if (colorAccessor)
@@ -156,13 +156,13 @@ void recLoad(const cgltf_node *node, const glm::mat4 &matrix, std::vector<Vertex
                 {
                     v.color = {0.5f, 0.5f, 0.5f};
                 }
-                if(normalAccessor)
+                if (normalAccessor)
                 {
-                    cgltf_accessor_read_float(normalAccessor,index, &v.normal.r, 3);
+                    cgltf_accessor_read_float(normalAccessor, index, &v.normal.r, 3);
                 }
                 else
                 {
-                    v.normal = glm::vec3({0.0f,1.0f,0.0f});
+                    v.normal = glm::vec3({0.0f, 1.0f, 0.0f});
                 }
 
                 outputVertices.push_back(v);
@@ -425,9 +425,9 @@ void createGraphicsPipeline()
     colorBlending.attachmentCount = 1;
     colorBlending.pAttachments = &colorBlendAttachment;
     VkPushConstantRange pushConstantRange{};
-    pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT;
+    pushConstantRange.stageFlags = VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT;
     pushConstantRange.offset = 0;
-    pushConstantRange.size = sizeof(glm::mat4)*2+sizeof(glm::vec4)*3; 
+    pushConstantRange.size = sizeof(glm::mat4) * 2 + sizeof(glm::vec4) * 3;
     // 8. Pipeline Layout (Uniforms/Global variables)
     // Even if empty, we must create it.
     VkPipelineLayoutCreateInfo pipelineLayoutInfo{};
@@ -1049,7 +1049,6 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     createGraphicsPipeline();
     swapChainFramebuffers.resize(swapChainImageViews.size());
 
-
     for (size_t i = 0; i < swapChainImageViews.size(); i++)
     {
         std::array<VkImageView, 2> image_views = {
@@ -1070,8 +1069,6 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
             SDL_Log("Failed to create framebuffer %zu!", i);
             return SDL_APP_FAILURE;
         }
-
-       
     }
     // ... [Previous setup: Instance -> Device -> Swapchain -> RenderPass -> Pipeline]
 
@@ -1165,10 +1162,10 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 }
 
 static float angle = 0.0f;
-glm::vec4 lightPos({1,-1,1,1});
-glm::vec4 lightColor({1,0,0,1});
-glm::vec3 camPos({0,1,5});
-glm::vec4 lightIntensity({1.0f,1.0f,1.0f,1});
+glm::vec4 lightPos({2, 0, 0, 1});
+glm::vec4 lightColor({1, 1, 1, 1});
+glm::vec3 camPos({0, 1, 5});
+glm::vec4 lightIntensity({1, 1.0f, 1.0f, 1});
 
 SDL_AppResult SDL_AppIterate(void *appstate)
 {
@@ -1231,15 +1228,15 @@ SDL_AppResult SDL_AppIterate(void *appstate)
 
     glm::mat4 meshMatrix = projection * view * model;
     size_t loc = 0;
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::mat4), &meshMatrix);
-    loc+=sizeof(glm::mat4);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::mat4), &model);
-    loc+=sizeof(glm::mat4);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightPos);
-    loc+=sizeof(glm::vec4);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightColor);
-    loc+=sizeof(glm::vec4);
-    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT, loc, sizeof(glm::vec4), &lightIntensity);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, loc, sizeof(glm::mat4), &meshMatrix);
+    loc += sizeof(glm::mat4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, loc, sizeof(glm::mat4), &model);
+    loc += sizeof(glm::mat4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, loc, sizeof(glm::vec4), &lightPos);
+    loc += sizeof(glm::vec4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, loc, sizeof(glm::vec4), &lightColor);
+    loc += sizeof(glm::vec4);
+    vkCmdPushConstants(commandBuffer, pipelineLayout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, loc, sizeof(glm::vec4), &lightIntensity);
     vkCmdDraw(commandBuffer, static_cast<uint32_t>(vertices.size()), 1, 0, 0);
 
     vkCmdEndRenderPass(commandBuffer);

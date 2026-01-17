@@ -13,12 +13,10 @@ layout(push_constant) uniform PushConstants {
 
 layout(location = 0) out vec4 outColor;
 void main() {
-    vec3 normalized_normal = normalize(normal);
-    vec3 lp = vec3(-constants.lightPos);
-    float distance = length(lp +pos);
-    float attenuation =  constants.lightIntensity.x / (distance*distance );
-    float x = dot( normalized_normal, lp+pos);
-    vec4 baseColor = vec4(1.0f)*0.1f+constants.lightColor*0.9f;
-    
-    outColor = baseColor; 
+    vec3 lightDir = -vec3(constants.lightPos) + pos;
+    float d = max(0.0,dot(normalize(lightDir),normalize(normal)));
+    //vec3 debugColor = normalize(normal) * 0.5 + 0.5;
+
+    //outColor=vec4(debugColor,1.0);
+    outColor=d*vec4(fragColor,1.0)*constants.lightColor;
 }

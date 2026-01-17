@@ -27,6 +27,6 @@ void main() {
     pos = vec3(constants.model*vec4(inPosition,1.0f));
     gl_Position = temppos;
 
-    outNormal =vec3(constants.render_matrix * vec4(normal,1.0f) );
+    outNormal =vec3(constants.model * vec4(normal,0.0f) );
     //outNormal=vec3(1.0f);
 }
