@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(ASSET_FILES 
     "${CMAKE_CURRENT_SOURCE_DIR}/vert.spv" 
     "${CMAKE_CURRENT_SOURCE_DIR}/frag.spv"
-    "${CMAKE_CURRENT_SOURCE_DIR}/Untitled.glb"  # <--- Make sure you have this file!
     "${CMAKE_CURRENT_SOURCE_DIR}/Audi R8.glb"  # <--- Make sure you have this file!
 )
 

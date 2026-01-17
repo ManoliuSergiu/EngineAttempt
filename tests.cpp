@@ -1162,8 +1162,8 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 }
 
 static float angle = 0.0f;
-glm::vec4 lightPos({2, 0, 0, 1});
-glm::vec4 lightColor({1, 1, 1, 1});
+glm::vec4 lightPos({100, -100, 0, 1});
+glm::vec4 lightColor({1, .9f, .9f, 1});
 glm::vec3 camPos({0, 1, 5});
 glm::vec4 lightIntensity({1, 1.0f, 1.0f, 1});
 
